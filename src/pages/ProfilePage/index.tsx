@@ -36,7 +36,7 @@ export const ProfilePage = observer(() => {
                     <div className={styles.user_info_wrapper}>
                         <img className={styles.user_avatar} src={currentUser?.photoURL} alt="IMAGE"/>
                         <div className={styles.user_info}>
-                            Новое имя Человека
+                            Имя Человека
                             {currentUser?.email}
                             <Button onClick={handleChangeProfile} disabled={false} mode={"secondary"}>Редактировать</Button>
                         </div>
