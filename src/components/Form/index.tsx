@@ -6,7 +6,7 @@ import {database, storage, uploadUserPhoto, useAuth} from "../../firebase";
 import {getDownloadURL, ref, uploadBytes,  deleteObject, uploadBytesResumable} from 'firebase/storage'
 import { collection, onSnapshot,  doc, setDoc } from "firebase/firestore";
 import {categories} from "../../categoriesData";
-
+console.log(categories)
 export const Form = () => {
     let selectedFile:any;
 
@@ -91,11 +91,11 @@ export const Form = () => {
                 <Input placeholder={'Страна'} required={true} id="country"  onChange={(e: any) => setCountry(e.target.value)}/>
                 <Input placeholder={'Aдрес'} required={true} id="address"  onChange={(e: any) => setAddress(e.target.value)}/>
                 <select id="category">
-                    {categories && categories.map(data =>{
+                    {categories && categories.map(data =>(
                         <option key={data.id} onClick={() => setCategory(data.name)}>
                             {data.name}
                         </option>
-                    })}
+                    ))}
                 </select>
                 <textarea required={true} id="description" placeholder={'Расскажи о своем опыте'}  onChange={(e: any) => setDescription(e.target.value)}/>
                 <input type="file" id="upload" required onChange={uploadImage}/>
