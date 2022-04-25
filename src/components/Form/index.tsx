@@ -66,6 +66,7 @@ export const Form = () => {
                   userId: currentUser.uid,
                   imageURL: imageAsset,
                   description: description,
+                  category: category,
                   likes: [],
                   comments: []
               }
@@ -75,6 +76,7 @@ export const Form = () => {
           console.log(error)
       }
     }
+
     const onSubmit = async (data: any) => {
         setAddress('')
         setCountry('')
@@ -90,9 +92,9 @@ export const Form = () => {
                 <Input placeholder={'Название'} required={true} id="title" onChange={(e: any) => setTitle(e.target.value)}/>
                 <Input placeholder={'Страна'} required={true} id="country"  onChange={(e: any) => setCountry(e.target.value)}/>
                 <Input placeholder={'Aдрес'} required={true} id="address"  onChange={(e: any) => setAddress(e.target.value)}/>
-                <select id="category">
-                    {categories && categories.map(data =>(
-                        <option key={data.id} onClick={() => setCategory(data.name)}>
+                <select id="category" value={category} onChange={(e:any) => setCategory(e.target.value)}>
+                    {categories && categories.map(data => (
+                        <option key={data.id} value={data.name}>
                             {data.name}
                         </option>
                     ))}

@@ -1,7 +1,7 @@
 import {observer} from "mobx-react";
 
-export const Category = observer(() => {
+export const Category = ({data}:any) => {
     return (
-        <div></div>
+        <div>Категория</div>
     )
-})
+}
