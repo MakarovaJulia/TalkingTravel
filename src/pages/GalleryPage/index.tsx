@@ -3,6 +3,9 @@ import {useNavigate} from "react-router";
 import {BaseLayout} from "../../components/BaseLayout";
 import {Feed} from "../../components/Feed";
 import React from "react";
+import {Category} from "../../components/Category";
+import {categories} from "../../categoriesData"
+import styles from './index.module.sass';
 
 
 
@@ -15,7 +18,10 @@ export const GalleryPage = observer(() => {
 
     return (
         <BaseLayout>
-            <div>
+            <div className={styles.gallery_wrapper}>
+                <div className={styles.categories_wrapper}>
+                    {categories && categories.map(data => <Category key={data.id} data={data}/>)}
+                </div>
                 <Feed/>
             </div>
         </BaseLayout>

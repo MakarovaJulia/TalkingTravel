@@ -10,6 +10,7 @@ import {ProfilePage} from "./pages/ProfilePage";
 import {GalleryPin} from "./components/GalleryPin";
 import {CardPage} from "./pages/CardPage";
 import {OtherUserProfilePage} from "./pages/OtherUserProfilePage";
+import {Feed} from "./components/Feed";
 
 
 
@@ -25,6 +26,7 @@ const App = hot(module)(() => {
                 <Route path="/profile" element={<ProfilePage />}/>
                 <Route path="/pinDetail/:pinId" element={<CardPage />}/>
                 <Route path="/userDetail/:userId" element={<OtherUserProfilePage />}/>
+                <Route path="/category/:categoryId" element={<GalleryPage />}/>
             </Routes>
     );
 })

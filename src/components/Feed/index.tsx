@@ -2,27 +2,31 @@ import React, {useEffect, useRef, useState} from "react"
 import {collection} from "firebase/firestore";
 import {database, useAuth} from "../../firebase";
 import {useNavigate} from "react-router";
-import {getAllFeeds} from "../../utils/fetchData";
+import {categoryFeeds, getAllFeeds} from "../../utils/fetchData";
 import styles from "./index.module.sass";
 import {Button} from "../ui/Button";
 import {GalleryPin} from "../GalleryPin";
+import {useParams} from "react-router-dom";
 
 export const Feed = () => {
     const [loading, setLoading] = useState(false)
     const [feeds, setFeeds] = useState<any>([])
-
-    let navigate = useNavigate()
-
-    const doSmth = () => {
-    }
+    const {categoryId} = useParams()
 
     useEffect(() => {
         setLoading(true)
-        getAllFeeds(database).then((data) => {
-            setFeeds(data)
-            setLoading(false)
-        })
-    }, [])
+        if(categoryId){
+            categoryFeeds(database, categoryId).then((data) =>{
+                setFeeds(data)
+                setLoading(false)
+            })
+        } else {
+            getAllFeeds(database).then((data) => {
+                setFeeds(data)
+                setLoading(false)
+            })
+        }
+    }, [categoryId])
 
     if (loading) return <div>Загрузка...</div>
 

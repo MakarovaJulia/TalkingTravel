@@ -9,6 +9,17 @@ export const getAllFeeds = async (database:any) => {
     return feeds.docs.map(doc => doc.data())
 }
 
+export const categoryFeeds = async (database:any, categoryId:any) =>{
+    const feeds = await getDocs(
+        query(
+            collection(database, "posts"),
+            where("category", "==", categoryId),
+            orderBy("id", "desc")
+        )
+    )
+    return feeds.docs.map(doc => doc.data())
+}
+
 export const getUserInfo = async(database:any, userId:any) => {
     const userRef = doc(database, 'profile', userId)
     const userSnap = await getDoc(userRef)
