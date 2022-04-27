@@ -32,7 +32,9 @@ export const getUserInfo = async(database:any, userId:any) => {
 
 export const userUploadedPins = async (database:any, userId:any) => {
     const feeds = await getDocs(
-        query(collection(database, "posts"), where('userId', '==', userId), orderBy("id", "desc"))
+            query(collection(database, "posts"),
+            where('userId', '==', userId),
+            orderBy("id", "desc"))
     )
     return feeds.docs.map(doc => doc.data())
 }

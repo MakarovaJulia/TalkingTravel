@@ -7,15 +7,15 @@ import Profile from "../../components/profile";
 import {Button} from "../../components/ui/Button";
 import {Menu} from "../../components/Menu";
 import styles from "./index.module.sass";
-import signup_img from "../../assets/signup_img.png";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
-import {collection, getDocs} from "firebase/firestore";
-import {userUploadedPins} from "../../utils/fetchData";
+import {collection, getDocs, orderBy, query, where} from "firebase/firestore";
+import {RecommendedPins} from "../../components/RecommendedPins";
 
 
 export const ProfilePage = observer(() => {
 
     const usersDatabaseRef = collection(database, 'profile');
+    const postsDatabaseRef = collection(database, 'posts');
     const [loading, setLoading] = useState(false)
     const [feeds, setFeeds] = useState<any>(null)
     const [usersInfo, setUsersInfo] = useState<any>([]);
@@ -48,11 +48,19 @@ export const ProfilePage = observer(() => {
         getUserInfo().then();
     }, [])
 
-    useEffect(() =>{
-        userUploadedPins(database, usersInfo.id).then(feed =>{
-            setFeeds(feed)
-        })
-    })
+    useEffect(()=>{
+        const userUploadedPins = async () => {
+            const feeds = await getDocs(
+                query(postsDatabaseRef,
+                    where('userId', '==', usersInfo.uid),
+                    orderBy("id", "desc"))
+            )
+            let arr = feeds.docs.map((doc) => ({...doc.data()}))
+            setFeeds(arr)
+        }
+        userUploadedPins().then()
+    }, [usersInfo])
+
 
     async function handleLogout(){
         setLoading(true)
@@ -94,7 +102,7 @@ export const ProfilePage = observer(() => {
                         <Button disabled={loading|| !currentUser} onClick={handleLogout}>Выйти</Button>
                     </>}
                     {feeds && (
-                        <div>Видео</div>
+                        <RecommendedPins feeds={feeds}/>
                     )}
                 </div>
             </div>
