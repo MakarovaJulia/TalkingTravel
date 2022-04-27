@@ -10,12 +10,14 @@ import styles from "./index.module.sass";
 import signup_img from "../../assets/signup_img.png";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import {collection, getDocs} from "firebase/firestore";
+import {userUploadedPins} from "../../utils/fetchData";
 
 
 export const ProfilePage = observer(() => {
 
     const usersDatabaseRef = collection(database, 'profile');
     const [loading, setLoading] = useState(false)
+    const [feeds, setFeeds] = useState<any>(null)
     const [usersInfo, setUsersInfo] = useState<any>([]);
     let navigate = useNavigate()
     const currentUser = useAuth()
@@ -32,6 +34,7 @@ export const ProfilePage = observer(() => {
     });
 
     useEffect(() => {
+        setLoading(true)
         const getUserInfo = async () => {
             const data = await getDocs(usersDatabaseRef);
             let arr = data.docs.map((doc) => ({...doc.data()}))
@@ -40,9 +43,16 @@ export const ProfilePage = observer(() => {
             })
             let ans = arr[user]
             setUsersInfo(ans)
+            setLoading(false)
         };
         getUserInfo().then();
     }, [])
+
+    useEffect(() =>{
+        userUploadedPins(database, usersInfo.id).then(feed =>{
+            setFeeds(feed)
+        })
+    })
 
     async function handleLogout(){
         setLoading(true)
@@ -58,6 +68,8 @@ export const ProfilePage = observer(() => {
     const handleChangeProfile = () => {
         console.log(currentUser)
     }
+
+    if(loading) return <div>Загрузка...</div>
 
     return (
         <BaseLayout>
@@ -81,6 +93,9 @@ export const ProfilePage = observer(() => {
                         <Profile/>
                         <Button disabled={loading|| !currentUser} onClick={handleLogout}>Выйти</Button>
                     </>}
+                    {feeds && (
+                        <div>Видео</div>
+                    )}
                 </div>
             </div>
         </BaseLayout>
