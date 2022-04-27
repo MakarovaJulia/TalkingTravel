@@ -2,19 +2,47 @@ import React, {useEffect, useRef, useState} from "react"
 import {observer} from "mobx-react";
 import {useNavigate} from "react-router";
 import {BaseLayout} from "../../components/BaseLayout";
-import {logout, useAuth} from "../../firebase";
+import {database, logout, useAuth} from "../../firebase";
 import Profile from "../../components/profile";
 import {Button} from "../../components/ui/Button";
 import {Menu} from "../../components/Menu";
 import styles from "./index.module.sass";
 import signup_img from "../../assets/signup_img.png";
+import {getAuth, onAuthStateChanged} from "firebase/auth";
+import {collection, getDocs} from "firebase/firestore";
 
 
 export const ProfilePage = observer(() => {
 
+    const usersDatabaseRef = collection(database, 'profile');
     const [loading, setLoading] = useState(false)
+    const [usersInfo, setUsersInfo] = useState<any>([]);
     let navigate = useNavigate()
     const currentUser = useAuth()
+
+    let uid = "";
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            uid = user.uid;
+        } else {
+            console.log("Пользователь не авторизован")
+        }
+    });
+
+    useEffect(() => {
+        const getUserInfo = async () => {
+            const data = await getDocs(usersDatabaseRef);
+            let arr = data.docs.map((doc) => ({...doc.data()}))
+            let user = arr.findIndex(function (user,index){
+                return user.uid === uid
+            })
+            let ans = arr[user]
+            setUsersInfo(ans)
+        };
+        getUserInfo().then();
+    }, [])
 
     async function handleLogout(){
         setLoading(true)
@@ -39,10 +67,10 @@ export const ProfilePage = observer(() => {
                         <img className={styles.user_avatar} src={currentUser?.photoURL} alt="IMAGE"/>
                         <div className={styles.user_info}>
                             <h1 className={styles.user_name}>
-                                {currentUser?.name}
+                                {usersInfo.name}
                             </h1>
                             <p className={styles.user_email}>
-                                {currentUser?.email}
+                                {usersInfo.email}
                             </p>
                             <Button onClick={handleChangeProfile} disabled={false} mode={"secondary"}>Редактировать</Button>
                         </div>
