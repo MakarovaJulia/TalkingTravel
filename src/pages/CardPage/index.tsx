@@ -15,6 +15,7 @@ export const CardPage = observer(() => {
     let navigate = useNavigate()
 
     const currentUser = useAuth()
+
     const {pinId} = useParams()
 
     const [loading, setLoading] = useState(false)
@@ -38,6 +39,9 @@ export const CardPage = observer(() => {
 
     if(loading) return <div>Загрузка...</div>
 
+    console.log("На странице поста ")
+    console.log(currentUser)
+
     const goTo = (path: string): void => {
         navigate(path)
     }
@@ -58,7 +62,7 @@ export const CardPage = observer(() => {
                                 {imageInfo?.description}
                             </div>
                             <div className={styles.like_btn}>
-                                {currentUser && <LikeArticle id={imageInfo.id} likes={imageInfo.likes}/>}
+                                {currentUser && <LikeArticle id={pinId} likes={imageInfo.likes} currentUser={currentUser}/>}
                             </div>
                         </div>
                     </div>

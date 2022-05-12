@@ -79,6 +79,8 @@ export const ProfilePage = observer(() => {
 
     if(loading) return <div>Загрузка...</div>
 
+    console.log(currentUser)
+
     return (
         <BaseLayout>
             <div className={styles.content_container}>

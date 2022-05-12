@@ -6,15 +6,19 @@ import React from "react";
 import {Category} from "../../components/Category";
 import {categories} from "../../categoriesData"
 import styles from './index.module.sass';
+import {useAuth} from "../../firebase";
 
 
 
 export const GalleryPage = observer(() => {
     let navigate = useNavigate()
+    const currentUser = useAuth()
 
     const goTo = (path: string): void => {
         navigate(path)
     }
+
+    console.log(currentUser)
 
     return (
         <BaseLayout>
