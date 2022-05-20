@@ -7,14 +7,19 @@ import vertical_divider from '../../assets/vertical_divider.svg'
 import {NavLink} from "react-router-dom";
 import {Button} from "../ui/Button";
 import {useNavigate} from "react-router";
+import {useAuth} from "../../firebase";
 
 export const Header = (props: any) =>{
     const { children } = props;
     let navigate = useNavigate()
 
-    const goToLogin = (): void => {
-        navigate('/login')
+    const currentUser = useAuth()
+
+    const goTo = (path:string): void => {
+        navigate(path)
     }
+
+    console.log(currentUser?.photoURL)
 
     return (
         <div className={styles.container}>
@@ -30,16 +35,18 @@ export const Header = (props: any) =>{
                              className={(navData) => navData.isActive ? styles.header_link_active : styles.header_link}>
                         Галерея
                     </NavLink>
-                    <NavLink to='/'
-                             className={(navData) => navData.isActive ? styles.header_link_active : styles.header_link}>
-                        Контакты
-                    </NavLink>
                 </div>
                     <img className={styles.vertical_divider} src={vertical_divider}/>
                     <img className={styles.header_icon} src={header_search_icon}/>
-                    <Button id={styles.header_login_btn} onClick={goToLogin} disabled={false}>
-                        <img className={styles.header_icon} src={header_profile_icon}/>
-                    </Button>
+                    {!currentUser ?
+                        <Button id={styles.header_login_btn} onClick={()=> goTo('/login')} disabled={false}>
+                            <img className={styles.header_icon} src={header_profile_icon}/>
+                        </Button>
+                        :
+                        <Button id={styles.header_login_btn} onClick={()=> goTo('/profile')} disabled={false}>
+                            <img className={styles.header_icon} src={currentUser?.photoURL ? currentUser?.photoURL : header_profile_icon}/>
+                        </Button>
+                    }
                 </div>
             </div>
         </div>

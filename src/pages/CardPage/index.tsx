@@ -28,7 +28,7 @@ export const CardPage = observer(() => {
             getSpecificPin(database, pinId).then((data) =>{
                 setImageInfo(data)
                 console.log(data)
-                // getUserInfo(database, data.userId).then((user)=>{
+                // getUserInfo(database, pinId).then((user)=>{
                 //     setUserInfo(user)
                 //  })
                 // console.log(data)

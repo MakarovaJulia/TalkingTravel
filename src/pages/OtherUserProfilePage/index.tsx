@@ -8,6 +8,7 @@ import styles from "./index.module.sass";
 import {getUserInfo, userUploadedPins} from "../../utils/fetchData";
 import avatar from  "../../assets/header_profile_icon.svg"
 import {Button} from "../../components/ui/Button";
+import {RecommendedPins} from "../../components/RecommendedPins";
 
 
 
@@ -54,14 +55,12 @@ export const OtherUserProfilePage = observer(() => {
                         <img className={styles.user_avatar} src={userInfo?.photoURL ? userInfo?.photoURL: avatar} alt="IMAGE"/>
                         <div className={styles.user_info}>
                             <h5>{userInfo?.name}</h5>
+                            <h5>{userInfo?.email}</h5>
                         </div>
-                    </div>
-                    <div className={styles.menu_container}>
-                        Места Подборки Лайки Прочее
                     </div>
                     {feeds && (
                         <div className={styles.feeds_wrapper}>
-                            Посты
+                            <RecommendedPins feeds={feeds}/>
                         </div>
                     )}
                 </div>

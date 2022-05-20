@@ -11,7 +11,7 @@ export const categories = [
     {id: 2, name:"Кафе", iconSrc: cafe},
     {id: 3, name:"Ресторан", iconSrc: restaurant},
     {id: 4, name:"Стадион", iconSrc: stadium},
-    {id: 5, name:"Театр", iconSrc: theatre },
+    {id: 5, name:"Театр", iconSrc: restaurant},
     {id: 6, name:"Музей", iconSrc: museum},
     {id: 7, name:"Другое", iconSrc: other},
 ]
