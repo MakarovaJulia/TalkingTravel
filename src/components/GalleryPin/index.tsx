@@ -24,11 +24,17 @@ export const GalleryPin = ({data}:any) => {
             <Link to={`/pinDetail/${data?.id}`}>
                 <img className={styles.pinImage} src={data.imageURL}/>
             </Link>
-            <div className={styles.content}>
+            <div className={styles.content_wrapper}>
+                <div className={styles.content}>
+                    <div className={styles.content_top}>
+                        <div className={styles.title}>{data.country}</div>
+                        <div className={styles.title}>{data.address}</div>
+                    </div>
+                    <div className={styles.content_bottom}>
+                        <h5 className={styles.title}>{data.title}</h5>
+                    </div>
+                </div>
                 <div className={styles.userInfo}>
-                    <div>{data.country}</div>
-                    <div>{data.address}</div>
-                    <h5 className={styles.title}>{data.title}</h5>
                     <Link to={`/userDetail/${userId}`}>
                         <img className={styles.userImage} src={userInfo?.photoURL ? userInfo?.photoURL : avatar}/>
                     </Link>
