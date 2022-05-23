@@ -84,7 +84,6 @@ export const ProfilePage = observer(() => {
 
     return (
 
-        <ProfileLayout>
             <div className={styles.content_container}>
                 <div className={styles.content_wrapper}>
                     {feeds && (
@@ -92,6 +91,5 @@ export const ProfilePage = observer(() => {
                     )}
                 </div>
             </div>
-        </ProfileLayout>
     )
 });

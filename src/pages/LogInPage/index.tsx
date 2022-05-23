@@ -67,7 +67,7 @@ export const LoginPage = observer(() => {
                         <Button disabled={false} onClick={handleLogin}>Войти</Button>
                     </div>
                     <div className={styles.login_footer}>
-                        Еще нет аккаунта?
+                        Еще нет аккаунта? 
                         <NavLink to='/signup'>
                             Зарегистрироваться
                         </NavLink>

@@ -11,6 +11,7 @@ import {GalleryPin} from "./components/GalleryPin";
 import {CardPage} from "./pages/CardPage";
 import {LikesPage} from "./pages/LikesPage";
 import {ListsPage} from "./pages/ListsPage";
+import {ProfileLayout} from "./components/ProfileLayout";
 import {OtherUserProfilePage} from "./pages/OtherUserProfilePage";
 import {Feed} from "./components/Feed";
 
@@ -25,12 +26,18 @@ const App = hot(module)(() => {
                 <Route path="/gallery" element={<GalleryPage />}/>
                 <Route path="/login" element={<LoginPage />}/>
                 <Route path="/signup" element={<SignUpPage />}/>
-                <Route path="/profile" element={<ProfilePage />}/>
                 <Route path="/pinDetail/:pinId" element={<CardPage />}/>
                 <Route path="/userDetail/:userId" element={<OtherUserProfilePage />}/>
                 <Route path="/category/:categoryId" element={<GalleryPage />}/>
-                <Route path="/likes" element={<LikesPage />}/>
-                <Route path="/lists" element={<ListsPage />}/>
+                <Route path="/profile" element={<ProfileLayout />}>
+                    <Route index element={<ProfilePage />}/>
+                </Route>
+                <Route path="/likes" element={<ProfileLayout />}>
+                    <Route index element={<LikesPage />}/>
+                </Route>
+                <Route path="/lists" element={<ProfileLayout />}>
+                    <Route index element={<ListsPage />}/>
+                </Route>
             </Routes>
     );
 })

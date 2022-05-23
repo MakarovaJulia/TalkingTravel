@@ -81,10 +81,8 @@ export const LikesPage = observer(() => {
     console.log(currentUser)
 
     return (
-        <ProfileLayout>
             <div className={styles.content_container}>
                 likes
             </div>
-        </ProfileLayout>
     )
 });
