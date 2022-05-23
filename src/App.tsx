@@ -13,22 +13,30 @@ import {LikesPage} from "./pages/LikesPage";
 import {ListsPage} from "./pages/ListsPage";
 import {OtherUserProfilePage} from "./pages/OtherUserProfilePage";
 import {Feed} from "./components/Feed";
+import {ProtectedRoute} from "./utils/protectedRoute";
+import {useAuth} from "./firebase";
+
 
 
 
 
 const App = hot(module)(() => {
+
+    const currentUser = useAuth()
+
     return (
             <Routes>
                 <Route path="/" element={<MainPage />}/>
-                <Route path="/add_card_page" element={<AddCardPage />}/>
-                <Route path="/gallery" element={<GalleryPage />}/>
+                <Route element={<ProtectedRoute isAllowed={!!currentUser} />}>
+                    <Route path="/add_card_page" element={<AddCardPage />}/>
+                    <Route path="/gallery" element={<GalleryPage />}/>
+                    <Route path="/profile" element={<ProfilePage />}/>
+                    <Route path="/pinDetail/:pinId" element={<CardPage />}/>
+                    <Route path="/userDetail/:userId" element={<OtherUserProfilePage />}/>
+                    <Route path="/category/:categoryId" element={<GalleryPage />}/>
+                </Route>
                 <Route path="/login" element={<LoginPage />}/>
                 <Route path="/signup" element={<SignUpPage />}/>
-                <Route path="/profile" element={<ProfilePage />}/>
-                <Route path="/pinDetail/:pinId" element={<CardPage />}/>
-                <Route path="/userDetail/:userId" element={<OtherUserProfilePage />}/>
-                <Route path="/category/:categoryId" element={<GalleryPage />}/>
                 <Route path="/likes" element={<LikesPage />}/>
                 <Route path="/lists" element={<ListsPage />}/>
             </Routes>
