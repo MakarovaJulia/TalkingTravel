@@ -131,6 +131,9 @@ export const ProfileLayout: FC<IProfileLayout> = ({children}) => {
                 {children}
                 <Outlet />
             </main>
+            <footer className={styles.footer}>
+                <Footer />
+            </footer>
         </div>
     )
 }
