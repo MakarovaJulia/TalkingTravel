@@ -12,8 +12,6 @@ import UploadPhoto from "../../components/UploadPhoto";
 import {Button} from "../../components/ui/Button";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import {collection, getDocs, orderBy, query, where} from "firebase/firestore";
-import {LikesPage} from "../../pages/LikesPage";
-import {ListsPage} from "../../pages/ListsPage";
 
 
 export interface IProfileLayout {
@@ -27,6 +25,16 @@ export const ProfileLayout: FC<IProfileLayout> = ({children}) => {
     const [usersInfo, setUsersInfo] = useState<any>([]);
     let navigate = useNavigate()
     const currentUser = useAuth()
+
+    const handleShareStory = ()=> {
+        if (currentUser){
+            navigate('/add_card_page')
+            console.log('Current user')
+        } else {
+            navigate('/signup')
+            console.log('No current user')
+        }
+    }
 
     let uid = "";
     const auth = getAuth();
@@ -105,7 +113,10 @@ export const ProfileLayout: FC<IProfileLayout> = ({children}) => {
                                 {currentUser &&
                                 <>
                                     <UploadPhoto/>
-                                    <Button disabled={loading|| !currentUser} onClick={handleLogout}>Выйти</Button>
+                                    <div className={styles.profile_btn}>
+                                        <Button disabled={false} onClick={handleShareStory}>Поделиться историей</Button>
+                                        <Button disabled={loading|| !currentUser} onClick={handleLogout}>Выйти</Button>
+                                    </div>
                                 </>}
                             </div>
                         </div>
