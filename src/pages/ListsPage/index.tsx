@@ -10,10 +10,9 @@ import {collection, getDocs, orderBy, query, where} from "firebase/firestore";
 import {RecommendedPins} from "../../components/RecommendedPins";
 import {Header} from "../../components/Header";
 import {LikesPage} from "../LikesPage";
-import {ListsPage} from "../ListsPage";
 
 
-export const ProfilePage = observer(() => {
+export const ListsPage = observer(() => {
 
     const usersDatabaseRef = collection(database, 'profile');
     const postsDatabaseRef = collection(database, 'posts');
@@ -83,14 +82,9 @@ export const ProfilePage = observer(() => {
     console.log(currentUser)
 
     return (
-
         <ProfileLayout>
             <div className={styles.content_container}>
-                <div className={styles.content_wrapper}>
-                    {feeds && (
-                        <RecommendedPins feeds={feeds}/>
-                    )}
-                </div>
+                lists
             </div>
         </ProfileLayout>
     )

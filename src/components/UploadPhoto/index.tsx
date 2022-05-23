@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from "react"
-import avatar from '../assets/header_profile_icon.svg'
-import {useAuth, uploadUserPhoto} from "../firebase";
+import avatar from '../../assets/header_profile_icon.svg'
+import {useAuth, uploadUserPhoto} from "../../firebase";
 import {set} from "mobx";
+import {inspect} from "util";
+import styles from "./index.module.sass";
 
 export default function ProfilePage(){
     const currentUser = useAuth()

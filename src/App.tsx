@@ -9,6 +9,8 @@ import {SignUpPage} from "./pages/SignUpPage";
 import {ProfilePage} from "./pages/ProfilePage";
 import {GalleryPin} from "./components/GalleryPin";
 import {CardPage} from "./pages/CardPage";
+import {LikesPage} from "./pages/LikesPage";
+import {ListsPage} from "./pages/ListsPage";
 import {OtherUserProfilePage} from "./pages/OtherUserProfilePage";
 import {Feed} from "./components/Feed";
 
@@ -27,6 +29,8 @@ const App = hot(module)(() => {
                 <Route path="/pinDetail/:pinId" element={<CardPage />}/>
                 <Route path="/userDetail/:userId" element={<OtherUserProfilePage />}/>
                 <Route path="/category/:categoryId" element={<GalleryPage />}/>
+                <Route path="/likes" element={<LikesPage />}/>
+                <Route path="/lists" element={<ListsPage />}/>
             </Routes>
     );
 })
