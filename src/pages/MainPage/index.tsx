@@ -36,6 +36,7 @@ export const MainPage = observer(() => {
                     </div>
                 </div>
             </div>
+            
         </BaseLayout>
     )
 });
