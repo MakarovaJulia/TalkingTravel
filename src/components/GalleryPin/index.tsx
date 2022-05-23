@@ -2,14 +2,16 @@ import React, {useEffect, useRef, useState} from "react"
 import styles from "./index.module.sass";
 import {Link, NavLink} from "react-router-dom";
 import {getUserInfo} from "../../utils/fetchData";
-import {database} from "../../firebase";
+import {database, useAuth, storage} from "../../firebase";
 import avatar from '../../assets/header_profile_icon.svg'
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 
 
 export const GalleryPin = ({data}:any) => {
     const [userInfo, setUserInfo] = useState<any>(null)
 
     const [userId, setUserId] = useState<any>(null)
+    const [userImg, setUserImg] = useState<any>(null)
 
     useEffect(()=>{
         if(data) setUserId(data.userId)
@@ -18,6 +20,18 @@ export const GalleryPin = ({data}:any) => {
         })
     }, [userId])
 
+    console.log('Gallery pin user info')
+    console.log(userInfo)
+
+    useEffect(()=>{
+        if(userInfo){
+            getDownloadURL(ref(storage, userInfo.uid + '.png'))
+                .then((url) => {
+                    setUserImg(url)
+                    console.log(url)
+                })
+        }
+    }, [userInfo])
 
     return (
         <div className={styles.pinWrapper}>
@@ -36,7 +50,7 @@ export const GalleryPin = ({data}:any) => {
                 </div>
                 <div className={styles.userInfo}>
                     <Link to={`/userDetail/${userId}`}>
-                        <img className={styles.userImage} src={userInfo?.photoURL ? userInfo?.photoURL : avatar}/>
+                        <img className={styles.userImage} src={userInfo?.uid ?  userImg : avatar}/>
                     </Link>
                 </div>
             </div>
