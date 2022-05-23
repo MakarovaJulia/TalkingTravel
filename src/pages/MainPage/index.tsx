@@ -4,6 +4,10 @@ import {BaseLayout} from "../../components/BaseLayout";
 import styles from "./index.module.sass";
 import {Button} from "../../components/ui/Button";
 import {useAuth} from "../../firebase";
+import preview_img from "../../assets/preview_img.png"
+import avatar from "../../assets/header_profile_icon.svg";
+import React from "react";
+
 
 
 
@@ -34,6 +38,16 @@ export const MainPage = observer(() => {
                             <Button disabled={false} onClick={handleShareStory}>Поделиться историей</Button>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div className={styles.preview_container}>
+                <img className={styles.preview_img} src={preview_img}/>
+                <div className={styles.preview_title}>
+                    <h1 className={styles.main_title}>
+                        <span>Поделись</span> своей историей
+                    </h1>
+                    <h5 className={styles.second_title}>Выкладывай фото и описание своих любимых мест</h5>
                 </div>
             </div>
             
