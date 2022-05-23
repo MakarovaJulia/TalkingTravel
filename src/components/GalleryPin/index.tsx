@@ -35,9 +35,8 @@ export const GalleryPin = ({data}:any) => {
 
     return (
         <div className={styles.pinWrapper}>
-            <Link to={`/pinDetail/${data?.id}`}>
+            <Link className={styles.link_wrapper} to={`/pinDetail/${data?.id}`}></Link>
                 <img className={styles.pinImage} src={data.imageURL}/>
-            </Link>
             <div className={styles.content_wrapper}>
                 <div className={styles.content}>
                     <div className={styles.content_top}>
