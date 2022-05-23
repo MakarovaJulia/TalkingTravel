@@ -8,11 +8,12 @@ const cx = classNames.bind(styles);
 
 export const Input = React.forwardRef<HTMLInputElement, IInput>(
     (props, ref) => {
-        const { placeholder, type, id, value, onChange, required, children, ...inputProps} = props;
+        const { placeholder, type, title, id, value, onChange, required, children, ...inputProps} = props;
         return (
             <input
                 ref={ref}
                 type={type}
+                title={title}
                 value={value}
                 placeholder={placeholder}
                 onChange={onChange}

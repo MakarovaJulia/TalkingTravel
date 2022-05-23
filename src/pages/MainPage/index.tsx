@@ -3,10 +3,13 @@ import {useNavigate} from "react-router";
 import {BaseLayout} from "../../components/BaseLayout";
 import styles from "./index.module.sass";
 import {Button} from "../../components/ui/Button";
-import {useAuth} from "../../firebase";
+import {database, useAuth} from "../../firebase";
 import preview_img from "../../assets/preview_img.png"
 import avatar from "../../assets/header_profile_icon.svg";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {collection, getDocs, limit, orderBy, query, where} from "firebase/firestore";
+import {categoryFeeds, getAllFeeds, getTopFourPins} from "../../utils/fetchData";
+import {RecommendedPins} from "../../components/RecommendedPins";
 
 
 
@@ -14,6 +17,9 @@ import React from "react";
 export const MainPage = observer(() => {
     let navigate = useNavigate()
     const currentUser = useAuth()
+
+    const [feeds, setFeeds] = useState<any>(null)
+    const postsDatabaseRef = collection(database, 'posts');
 
     const handleShareStory = ()=> {
         if (currentUser){
@@ -24,6 +30,14 @@ export const MainPage = observer(() => {
             console.log('No current user')
         }
     }
+
+
+
+    useEffect(() => {
+        getTopFourPins(database).then((data) => {
+            setFeeds(data)
+        })
+    }, [])
 
     return (
         <BaseLayout>
@@ -50,6 +64,12 @@ export const MainPage = observer(() => {
                     <h5 className={styles.second_title}>Выкладывай фото и описание своих любимых мест</h5>
                 </div>
             </div>
+
+            {/*<div className={styles.content_wrapper}>*/}
+            {/*    {feeds && (*/}
+            {/*        <RecommendedPins feeds={feeds}/>*/}
+            {/*    )}*/}
+            {/*</div>*/}
             
         </BaseLayout>
     )

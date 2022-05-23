@@ -6,9 +6,15 @@
   display: flex
   flex-direction: column
 
-#card_form_submit
+
+.card_form_submit
   background-color: #8A53FF
   color: white
+  &:disabled
+    background-color: lightgray
+    color: dimgray
+    border: none
+
 
 #card_form_description
   height: 50px
@@ -25,5 +31,21 @@
   outline: none !important
   border: 1px solid #8A53FF
 
-#category
-  margin-bottom: 10px
+.category
+  width: 100%
+  border: 1px solid lightgray
+  border-radius: 5px
+  padding-left: 8px
+  margin-bottom: 20px
+  height: 40px
+
+.description
+  width: 100%
+  border: 1px solid lightgray
+  border-radius: 5px
+  padding-left: 8px
+  margin-bottom: 20px
+  min-height: 80px
+
+.file_upload
+  margin-bottom: 20px

@@ -1,11 +1,12 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useForm } from 'react-hook-form'
 import styles from "./index.module.sass";
 import {Input} from "../ui/Input";
 import {database, storage, uploadUserPhoto, useAuth} from "../../firebase";
 import {getDownloadURL, ref, uploadBytes,  deleteObject, uploadBytesResumable} from 'firebase/storage'
-import { collection, onSnapshot,  doc, setDoc } from "firebase/firestore";
+import {collection, onSnapshot, doc, setDoc, getDocs, query, where, orderBy} from "firebase/firestore";
 import {categories} from "../../categoriesData";
+import {RecommendedPins} from "../RecommendedPins";
 console.log(categories)
 export const Form = () => {
     let selectedFile:any;
@@ -14,6 +15,7 @@ export const Form = () => {
     const currentUser = useAuth()
 
     const[title, setTitle] = useState('')
+    const[disabled, setDisabled] = useState(true)
     const[country, setCountry] = useState('')
     const[address, setAddress] = useState('')
     const[image, setImage] = useState('')
@@ -55,8 +57,8 @@ export const Form = () => {
     const uploadDetails = async () => {
       try{
           setLoading(true)
+          console.log(disabled)
           if(!title && !country && !address && !description && !imageAsset){
-              console.log('no ditails')
           } else {
               const data = {
                   id: `${Date.now()}`,
@@ -87,22 +89,38 @@ export const Form = () => {
         reset()
     }
 
+
+    useEffect(()=>{
+        if(title && country && address && description && imageAsset){
+            setDisabled(false)
+            console.log(disabled)
+        } else {
+            setDisabled(true)
+            console.log(disabled)
+        }
+    }, [title, country, address, description, imageAsset])
+
     return (
             <form onSubmit={handleSubmit(onSubmit)} className={styles.card_form}>
+                <div>
+                    {loading &&(
+                    <div>Загрузка...</div>
+                )}
+                </div>
                 <Input placeholder={'Название'} required={true} id="title" onChange={(e: any) => setTitle(e.target.value)}/>
                 <Input placeholder={'Страна'} required={true} id="country"  onChange={(e: any) => setCountry(e.target.value)}/>
                 <Input placeholder={'Aдрес'} required={true} id="address"  onChange={(e: any) => setAddress(e.target.value)}/>
-                <select id="category" value={category} onChange={(e:any) => setCategory(e.target.value)}>
+                <select className={styles.category} required={true} value={category} onChange={(e:any) => setCategory(e.target.value)}>
                     {categories && categories.map(data => (
                         <option key={data.id} value={data.name}>
                             {data.name}
                         </option>
                     ))}
                 </select>
-                <textarea required={true} id="description" placeholder={'Расскажи о своем опыте'}  onChange={(e: any) => setDescription(e.target.value)}/>
-                <input type="file" id="upload" required onChange={uploadImage}/>
+                <textarea className={styles.description} required={true} id="description" placeholder={'Расскажи о своем опыте'}  onChange={(e: any) => setDescription(e.target.value)}/>
+                <input className={styles.file_upload} type="file" id="upload" required onChange={uploadImage}/>
                 {/*<button onClick={deleteImage}/>*/}
-                <input id={styles.card_form_submit} type="submit" value="Добавить" onClick={uploadDetails}/>
+                <input className={styles.card_form_submit} type="submit" value="Добавить" disabled={disabled} onClick={uploadDetails}/>
             </form>
     )
 }
