@@ -5,6 +5,7 @@ export interface IInput {
     placeholder?: string;
     type?: any;
     value?:string;
+    title?:string;
     id?:string;
     onChange?: any;
     required?: boolean
