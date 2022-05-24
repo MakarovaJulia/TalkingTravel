@@ -15,9 +15,7 @@ import {OtherUserProfilePage} from "./pages/OtherUserProfilePage";
 import {Feed} from "./components/Feed";
 import {ProtectedRoute} from "./utils/protectedRoute";
 import {useAuth} from "./firebase";
-
-
-
+import {ProfileLayout} from "./components/ProfileLayout";
 
 
 const App = hot(module)(() => {
