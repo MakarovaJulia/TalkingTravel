@@ -67,10 +67,13 @@ export const SignUpPage = observer(() => {
                     <div className={styles.signup_form}>
                         <Input id={styles.name_input} ref={nameRef} onChange={(e: any) => setData({...data, name: e.target.value})} placeholder="Имя пользователя" />
                         <Input id={styles.email_input} ref={emailRef} onChange={(e: any) => setData({...data, email: e.target.value})} placeholder="Email" />
-                        <Input id={styles.password_input} ref={passwordRef}
-                               onChange={(e: any) => setData({...data, password: e.target.value})}
-                               type={passwordInputType} placeholder="Пароль" />
-                        <span className={styles.password_toggle_icon}>{toggleIcon}</span>
+                        <div className={styles.password_wrapper}>
+                            <div className={styles.password_input_wrapper}>
+                                <Input id={styles.password_input} ref={passwordRef}
+                                       type={passwordInputType} placeholder="Пароль"/>
+                            </div>
+                            <span className={styles.password_toggle_icon}>{toggleIcon}</span>
+                        </div>
                         <Button disabled={false} onClick={handleSignUp}>Зарегистрироваться</Button>
                     </div>
                     <div className={styles.signup_footer}>

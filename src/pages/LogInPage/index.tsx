@@ -61,9 +61,13 @@ export const LoginPage = observer(() => {
                     </div>
                     <div className={styles.login_form}>
                         <Input id={styles.email_input} ref={emailRef} placeholder="Email" />
-                        <Input id={styles.password_input} ref={passwordRef}
-                               type={passwordInputType} placeholder="Пароль" />
-                        <span className={styles.password_toggle_icon}>{toggleIcon}</span>
+                        <div className={styles.password_wrapper}>
+                            <div className={styles.password_input_wrapper}>
+                                <Input id={styles.password_input} ref={passwordRef}
+                                   type={passwordInputType} placeholder="Пароль"/>
+                            </div>
+                            <span className={styles.password_toggle_icon}>{toggleIcon}</span>
+                        </div>
                         <Button disabled={false} onClick={handleLogin}>Войти</Button>
                     </div>
                     <div className={styles.login_footer}>

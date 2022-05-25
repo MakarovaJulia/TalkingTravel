@@ -23,6 +23,7 @@ import {useAuth} from "./firebase";
 const App = hot(module)(() => {
 
     const currentUser = useAuth()
+    console.log(currentUser)
 
     return (
             <Routes>

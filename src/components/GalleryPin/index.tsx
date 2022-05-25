@@ -20,15 +20,11 @@ export const GalleryPin = ({data}:any) => {
         })
     }, [userId])
 
-    console.log('Gallery pin user info')
-    console.log(userInfo)
-
     useEffect(()=>{
         if(userInfo){
             getDownloadURL(ref(storage, userInfo.uid + '.png'))
                 .then((url) => {
                     setUserImg(url)
-                    console.log(url)
                 })
         }
     }, [userInfo])
