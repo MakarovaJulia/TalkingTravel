@@ -18,8 +18,6 @@ export const GalleryPage = observer(() => {
         navigate(path)
     }
 
-    console.log(currentUser)
-
     return (
         <BaseLayout>
             <div className={styles.gallery_wrapper}>

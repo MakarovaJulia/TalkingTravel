@@ -3,12 +3,13 @@ import {useNavigate} from "react-router";
 import {BaseLayout} from "../../components/BaseLayout";
 import React, {useEffect, useRef, useState} from "react"
 import {useParams} from "react-router-dom"
-import {database, useAuth} from "../../firebase";
+import {database, storage, useAuth} from "../../firebase";
 import styles from "./index.module.sass";
 import {getUserInfo, userUploadedPins} from "../../utils/fetchData";
 import avatar from  "../../assets/header_profile_icon.svg"
 import {Button} from "../../components/ui/Button";
 import {RecommendedPins} from "../../components/RecommendedPins";
+import {getDownloadURL, ref} from "firebase/storage";
 
 
 
@@ -20,6 +21,7 @@ export const OtherUserProfilePage = observer(() => {
     const [userInfo, setUserInfo] = useState<any>(null)
     const [feeds, setFeeds] = useState<any>(null)
     const [loading, setLoading] = useState(false)
+    const [userImg, setUserImg] = useState<any>(null)
 
     const goTo = (path: string): void => {
         navigate(path)
@@ -28,6 +30,15 @@ export const OtherUserProfilePage = observer(() => {
     const handleChangeProfile = () => {
         console.log(userInfo)
     }
+
+    useEffect(()=>{
+        if(userInfo){
+            getDownloadURL(ref(storage, userInfo.uid + '.png'))
+                .then((url) => {
+                    setUserImg(url)
+                })
+        }
+    }, [userInfo])
 
     useEffect(()=>{
         setLoading(true)
@@ -52,10 +63,10 @@ export const OtherUserProfilePage = observer(() => {
             <div className={styles.content_container}>
                 <div className={styles.content_wrapper}>
                     <div className={styles.user_info_wrapper}>
-                        <img className={styles.user_avatar} src={userInfo?.photoURL ? userInfo?.photoURL: avatar} alt="IMAGE"/>
+                        <img className={styles.userImage} src={userInfo?.uid ?  userImg : avatar}/>
                         <div className={styles.user_info}>
                             <h5>{userInfo?.name}</h5>
-                            <h5>{userInfo?.email}</h5>
+                            <h5 className={styles.user_email}>{userInfo?.email}</h5>
                         </div>
                     </div>
                     {feeds && (

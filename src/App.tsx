@@ -21,6 +21,7 @@ import {ProfileLayout} from "./components/ProfileLayout";
 const App = hot(module)(() => {
 
     const currentUser = useAuth()
+    console.log(currentUser)
 
     return (
         <Routes>
