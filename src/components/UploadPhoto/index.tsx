@@ -31,10 +31,10 @@ export default function ProfilePage(){
     return (
         <div>
             <div className={styles.input_photo_wrapper}>
-                <div className={styles.input_title}>Выберите фото</div>
+                <div className={styles.input_title}>Сменить аватар</div>
                 <input className={styles.input_photo} type="file" onChange={handleChange}/>
             </div>
-            <button className={styles.input_photo_btn} disabled={loading || !photo} onClick={handleClick}>Зугрузить</button>
+            <button className={styles.input_photo_btn} disabled={loading || !photo} onClick={handleClick}>Загрузить</button>
         </div>
     )
 }

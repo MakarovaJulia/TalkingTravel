@@ -111,14 +111,14 @@ export const ProfileLayout: FC<IProfileLayout> = ({children}) => {
                                 <p className={styles.user_email}>
                                     {usersInfo.email}
                                 </p>
-                                {currentUser &&
-                                <>
-                                    <UploadPhoto/>
                                     <div className={styles.profile_btn}>
+                                        {currentUser &&
+                                        <>
+                                        <UploadPhoto/>
                                         <Button disabled={false} onClick={handleShareStory}>Поделиться историей</Button>
                                         <Button disabled={loading|| !currentUser} onClick={handleLogout}>Выйти</Button>
+                                        </>}
                                     </div>
-                                </>}
                             </div>
                         </div>
                         <div className={styles.menu}>
