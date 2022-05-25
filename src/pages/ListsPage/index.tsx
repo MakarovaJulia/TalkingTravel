@@ -83,10 +83,8 @@ export const ListsPage = observer(() => {
     console.log(currentUser)
 
     return (
-        <ProfileLayout>
-            <div className={styles.content_container}>
-                lists
-            </div>
-        </ProfileLayout>
+        <div className={styles.content_container}>
+            lists
+        </div>
     )
 });
