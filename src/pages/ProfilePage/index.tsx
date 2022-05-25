@@ -93,19 +93,17 @@ export const ProfilePage = observer(() => {
     console.log(currentUser)
 
     return (
-        <ProfileLayout>
-            <div className={styles.content_container}>
-                <div className={styles.content_wrapper}>
-                    <div className={styles.recommended_pins}>
-                    {feeds && feeds.map((data: any) => (
-                        <div>
-                            <GalleryPin data={data}/>
-                            <button className={styles.delete_pin_btn} onClick={()=> deletePin(data.id)}>Удалить пост</button>
-                        </div>
-                    ))}
+        <div className={styles.content_container}>
+            <div className={styles.content_wrapper}>
+                <div className={styles.recommended_pins}>
+                {feeds && feeds.map((data: any) => (
+                    <div>
+                        <GalleryPin data={data}/>
+                        <button className={styles.delete_pin_btn} onClick={()=> deletePin(data.id)}>Удалить пост</button>
                     </div>
+                ))}
                 </div>
             </div>
-        </ProfileLayout>
+        </div>
     )
 });
