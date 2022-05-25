@@ -11,6 +11,7 @@ import {RecommendedPins} from "../../components/RecommendedPins";
 import {Header} from "../../components/Header";
 import {LikesPage} from "../LikesPage";
 import {ListsPage} from "../ListsPage";
+import {Spinner} from "../../components/Spinner";
 
 
 export const ProfilePage = observer(() => {
@@ -78,20 +79,17 @@ export const ProfilePage = observer(() => {
         console.log(currentUser)
     }
 
-    if(loading) return <div>Загрузка...</div>
+    if(loading) return <Spinner/>
 
     console.log(currentUser)
 
     return (
-
-        <ProfileLayout>
-            <div className={styles.content_container}>
-                <div className={styles.content_wrapper}>
-                    {feeds && (
-                        <RecommendedPins feeds={feeds}/>
-                    )}
-                </div>
+        <div className={styles.content_container}>
+            <div className={styles.content_wrapper}>
+                {feeds && (
+                    <RecommendedPins feeds={feeds}/>
+                )}
             </div>
-        </ProfileLayout>
+        </div>
     )
 });

@@ -12,6 +12,7 @@ import UploadPhoto from "../../components/UploadPhoto";
 import {Button} from "../../components/ui/Button";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import {collection, getDocs, orderBy, query, where} from "firebase/firestore";
+import {Spinner} from "../Spinner";
 
 
 export interface IProfileLayout {
@@ -91,7 +92,7 @@ export const ProfileLayout: FC<IProfileLayout> = ({children}) => {
         console.log(currentUser)
     }
 
-    if(loading) return <div>Загрузка...</div>
+    if(loading) return <Spinner/>
 
     console.log(currentUser)
     return (

@@ -10,6 +10,7 @@ import {collection, getDocs, orderBy, query, where} from "firebase/firestore";
 import {RecommendedPins} from "../../components/RecommendedPins";
 import {Header} from "../../components/Header";
 import {LikesPage} from "../LikesPage";
+import {Spinner} from "../../components/Spinner";
 
 
 export const ListsPage = observer(() => {
@@ -77,15 +78,13 @@ export const ListsPage = observer(() => {
         console.log(currentUser)
     }
 
-    if(loading) return <div>Загрузка...</div>
+    if(loading) return <Spinner/>
 
     console.log(currentUser)
 
     return (
-        <ProfileLayout>
-            <div className={styles.content_container}>
-                lists
-            </div>
-        </ProfileLayout>
+        <div className={styles.content_container}>
+            lists
+        </div>
     )
 });

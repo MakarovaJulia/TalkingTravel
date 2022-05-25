@@ -10,6 +10,7 @@ import avatar from  "../../assets/header_profile_icon.svg"
 import {Button} from "../../components/ui/Button";
 import {RecommendedPins} from "../../components/RecommendedPins";
 import {getDownloadURL, ref} from "firebase/storage";
+import {Spinner} from "../../components/Spinner";
 
 
 
@@ -56,7 +57,7 @@ export const OtherUserProfilePage = observer(() => {
 
 
 
-    if(loading) return <div>Загрузка...</div>
+    if(loading) return <Spinner/>
 
     return (
         <BaseLayout>

@@ -7,7 +7,9 @@ import {getDownloadURL, ref, uploadBytes,  deleteObject, uploadBytesResumable} f
 import {collection, onSnapshot, doc, setDoc, getDocs, query, where, orderBy} from "firebase/firestore";
 import {categories} from "../../categoriesData";
 import {RecommendedPins} from "../RecommendedPins";
-console.log(categories)
+import {Spinner} from "../Spinner";
+
+
 export const Form = () => {
     let selectedFile:any;
 
@@ -102,11 +104,6 @@ export const Form = () => {
 
     return (
             <form onSubmit={handleSubmit(onSubmit)} className={styles.card_form}>
-                <div>
-                    {loading &&(
-                    <div>Загрузка...</div>
-                )}
-                </div>
                 <Input placeholder={'Название'} required={true} id="title" onChange={(e: any) => setTitle(e.target.value)}/>
                 <Input placeholder={'Страна'} required={true} id="country"  onChange={(e: any) => setCountry(e.target.value)}/>
                 <Input placeholder={'Aдрес'} required={true} id="address"  onChange={(e: any) => setAddress(e.target.value)}/>
@@ -119,6 +116,11 @@ export const Form = () => {
                 </select>
                 <textarea className={styles.description} required={true} id="description" placeholder={'Расскажи о своем опыте'}  onChange={(e: any) => setDescription(e.target.value)}/>
                 <input className={styles.file_upload} type="file" id="upload" required onChange={uploadImage}/>
+                <div>
+                    {loading &&(
+                        <Spinner/>
+                    )}
+                </div>
                 {/*<button onClick={deleteImage}/>*/}
                 <input className={styles.card_form_submit} type="submit" value="Добавить" disabled={disabled} onClick={uploadDetails}/>
             </form>
