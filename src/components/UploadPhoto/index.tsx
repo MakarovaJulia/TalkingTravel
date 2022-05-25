@@ -29,10 +29,12 @@ export default function ProfilePage(){
 
 
     return (
-        <div >
-            <input type="file" onChange={handleChange}/>
-            <button disabled={loading || !photo} onClick={handleClick}>Upload</button>
-            <img src={photoURL} alt="avatar" width="50" height="50"/>
+        <div>
+            <div className={styles.input_photo_wrapper}>
+                <div className={styles.input_title}>Выберите фото</div>
+                <input className={styles.input_photo} type="file" onChange={handleChange}/>
+            </div>
+            <button className={styles.input_photo_btn} disabled={loading || !photo} onClick={handleClick}>Зугрузить</button>
         </div>
     )
 }

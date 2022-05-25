@@ -9,6 +9,7 @@ import {getAuth, onAuthStateChanged} from "firebase/auth";
 import {collection, getDocs, orderBy, query, where} from "firebase/firestore";
 import {RecommendedPins} from "../../components/RecommendedPins";
 import {Header} from "../../components/Header";
+import {Spinner} from "../../components/Spinner";
 
 
 export const LikesPage = observer(() => {
@@ -76,13 +77,14 @@ export const LikesPage = observer(() => {
         console.log(currentUser)
     }
 
-    if(loading) return <div>Загрузка...</div>
+    if(loading) return <Spinner/>
 
     console.log(currentUser)
 
     return (
-            <div className={styles.content_container}>
-                likes
-            </div>
+        <div className={styles.content_container}>
+            likes
+        </div>
+
     )
 });

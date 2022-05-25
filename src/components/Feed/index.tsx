@@ -7,6 +7,7 @@ import styles from "./index.module.sass";
 import {Button} from "../ui/Button";
 import {GalleryPin} from "../GalleryPin";
 import {useParams} from "react-router-dom";
+import {Spinner} from "../Spinner";
 
 export const Feed = () => {
     const [loading, setLoading] = useState(false)
@@ -28,7 +29,8 @@ export const Feed = () => {
         }
     }, [categoryId])
 
-    if (loading) return <div>Загрузка...</div>
+
+    if (loading) return <Spinner/>
 
     return (
         <div className={styles.feed}>

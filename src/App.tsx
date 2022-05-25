@@ -18,6 +18,9 @@ import {useAuth} from "./firebase";
 import {ProfileLayout} from "./components/ProfileLayout";
 
 
+
+
+
 const App = hot(module)(() => {
 
     const currentUser = useAuth()
@@ -33,13 +36,13 @@ const App = hot(module)(() => {
                 <Route path="/userDetail/:userId" element={<OtherUserProfilePage />}/>
                 <Route path="/category/:categoryId" element={<GalleryPage />}/>
                 <Route path="/profile" element={<ProfileLayout />}>
-                    <Route index element={<ProfilePage />}/>
+                    <Route index element={<ProfilePage/>}/>
                 </Route>
-                <Route path="/likes" element={<ProfileLayout />}>
-                    <Route index element={<LikesPage />}/>
+                <Route path="/likes" element={<ProfileLayout/>}>
+                    <Route index element={<LikesPage/>}/>
                 </Route>
-                <Route path="/lists" element={<ProfileLayout />}>
-                    <Route index element={<ListsPage />}/>
+                <Route path="/lists" element={<ProfileLayout/>}>
+                    <Route index element={<ListsPage/>}/>
                 </Route>
             </Route>
             <Route path="/login" element={<LoginPage />}/>
