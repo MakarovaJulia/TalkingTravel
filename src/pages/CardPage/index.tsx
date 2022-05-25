@@ -27,21 +27,16 @@ export const CardPage = observer(() => {
         if(pinId){
             setLoading(true)
             getSpecificPin(database, pinId).then((data) =>{
-                setImageInfo(data)
-                console.log(data)
-                // getUserInfo(database, pinId).then((user)=>{
-                //     setUserInfo(user)
-                //  })
-                // console.log(data)
+                setImageInfo(data.data())
+                getUserInfo(database, data.get("userId")).then((user)=>{
+                    setUserInfo(user)
+                 })
                 setLoading(false)
             })
         }
     },[pinId])
 
     if(loading) return <Spinner/>
-
-    console.log("На странице поста ")
-    console.log(currentUser)
 
     const goTo = (path: string): void => {
         navigate(path)
@@ -56,7 +51,6 @@ export const CardPage = observer(() => {
                         <div className={styles.infoWrapper}>
                             <img className={styles.pinImage} src={imageInfo?.imageURL}/>
                             {userInfo && <div className={styles.info}>
-                                <img className={styles.userImage} src={userInfo?.photoURL ? userInfo?.photoURL : avatar}/>
                                 <div>{userInfo?.name}</div>
                             </div>}
                             <div className={styles.info}>

@@ -42,11 +42,7 @@ export const userUploadedPins = async (database:any, userId:any) => {
 export const getSpecificPin = async(database:any, pinId:any) =>{
     const pinRef = doc(database, 'posts', pinId)
     const pinSnap = await getDoc(pinRef)
-    if (pinSnap.exists()){
-        return pinSnap.data()
-    } else {
-        return 'No such doc'
-    }
+    return pinSnap
 }
 
 
