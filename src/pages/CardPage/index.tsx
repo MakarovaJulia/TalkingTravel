@@ -8,6 +8,7 @@ import styles from "./index.module.sass";
 import {getSpecificPin, getUserInfo} from "../../utils/fetchData";
 import avatar from "../../assets/header_profile_icon.svg";
 import {LikeArticle} from "../../components/LikeArticle";
+import {Spinner} from "../../components/Spinner";
 
 
 
@@ -37,7 +38,7 @@ export const CardPage = observer(() => {
         }
     },[pinId])
 
-    if(loading) return <div>Загрузка...</div>
+    if(loading) return <Spinner/>
 
     console.log("На странице поста ")
     console.log(currentUser)

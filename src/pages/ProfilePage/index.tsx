@@ -12,6 +12,8 @@ import {Header} from "../../components/Header";
 import {LikesPage} from "../LikesPage";
 import {ListsPage} from "../ListsPage";
 import {Spinner} from "../../components/Spinner";
+import {GalleryPin} from "../../components/GalleryPin";
+import {deletePinById} from "../../utils/fetchData";
 
 
 export const ProfilePage = observer(() => {
@@ -79,6 +81,13 @@ export const ProfilePage = observer(() => {
         console.log(currentUser)
     }
 
+    const deletePin = (id:any) => {
+        setLoading(true)
+        deletePinById(database, id)
+        setLoading(false)
+        navigate('/profile')
+    }
+
     if(loading) return <Spinner/>
 
     console.log(currentUser)
@@ -86,9 +95,14 @@ export const ProfilePage = observer(() => {
     return (
         <div className={styles.content_container}>
             <div className={styles.content_wrapper}>
-                {feeds && (
-                    <RecommendedPins feeds={feeds}/>
-                )}
+                <div className={styles.recommended_pins}>
+                {feeds && feeds.map((data: any) => (
+                    <div>
+                        <GalleryPin data={data}/>
+                        <button className={styles.delete_pin_btn} onClick={()=> deletePin(data.id)}>Удалить пост</button>
+                    </div>
+                ))}
+                </div>
             </div>
         </div>
     )
