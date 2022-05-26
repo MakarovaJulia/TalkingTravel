@@ -115,7 +115,10 @@ export const Form = () => {
                     ))}
                 </select>
                 <textarea className={styles.description} required={true} id="description" placeholder={'Расскажи о своем опыте'}  onChange={(e: any) => setDescription(e.target.value)}/>
+                <div className={styles.input_photo_wrapper}>
+                    <div className={styles.input_title}>Загрузить фото</div>
                 <input className={styles.file_upload} type="file" id="upload" required onChange={uploadImage}/>
+                </div>
                 <div>
                     {loading &&(
                         <Spinner/>
