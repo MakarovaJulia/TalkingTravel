@@ -21,6 +21,15 @@ export default function ProfilePage(){
         uploadUserPhoto(photo, currentUser, setLoading)
     }
 
+    function refreshPage() {
+        window.location.reload();
+    }
+
+    function uploadPhoto() {
+        handleClick()
+        refreshPage()
+    }
+
     useEffect(()=>{
         if (currentUser?.photoURL) {
             setPhotoURL(currentUser.photoURL)
@@ -34,7 +43,7 @@ export default function ProfilePage(){
                 <div className={styles.input_title}>Сменить аватар</div>
                 <input className={styles.input_photo} type="file" onChange={handleChange}/>
             </div>
-            <button className={styles.input_photo_btn} disabled={loading || !photo} onClick={handleClick}>Загрузить</button>
+            <button className={styles.input_photo_btn} disabled={loading || !photo} onClick={uploadPhoto}>Загрузить</button>
         </div>
     )
 }
