@@ -63,7 +63,7 @@ export const ProfilePage = observer(() => {
             setFeeds(arr)
         }
         userUploadedPins().then()
-    }, [usersInfo])
+    }, [usersInfo, feeds])
 
 
     async function handleLogout(){
