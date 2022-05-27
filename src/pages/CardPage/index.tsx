@@ -55,6 +55,10 @@ export const CardPage = observer(() => {
                             <div>{userInfo?.name}</div>
                         </div>}
                         <h3>{imageInfo?.title}</h3>
+                        <div className={styles.additional_info}>
+                            <div>{imageInfo?.address}</div>
+                            <div>время</div>
+                        </div>
                         <div className={styles.info_wrapper}>
                             <p className={styles.info}>
                                 {imageInfo?.description}
