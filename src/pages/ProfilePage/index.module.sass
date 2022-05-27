@@ -37,3 +37,18 @@
         background-color: blueviolet
     .loading
       background: #8A53FF
+
+@media only screen and (max-width: 900px)
+  .content_wrapper
+    .recommended_pins
+      grid-template-columns: repeat(3, 1fr)
+
+@media only screen and (max-width: 750px)
+  .content_wrapper
+    .recommended_pins
+      grid-template-columns: repeat(2, 1fr)
+
+@media only screen and (max-width: 600px)
+  .content_wrapper
+    .recommended_pins
+      grid-template-columns: repeat(1, 1fr)

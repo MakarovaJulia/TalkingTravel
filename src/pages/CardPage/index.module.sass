@@ -1,20 +1,56 @@
-.contentWrapper
+.content_wrapper
   display: flex
   width: 100%
   height: auto
   justify-content: center
   align-items: center
   flex-direction: column
-  .contentContainer
+  .content_container
     display: flex
     width: 100%
     align-items: center
-    .infoWrapper
+    justify-content: center
+    flex-direction: row
+    margin-top: 10vh
+    .img_wrapper
+      flex: 0 0 50vh
+    .title_wrapper
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+      margin-left: 5vh
+      max-width: 60vh
+      height: 100%
+      .username
+        display: flex
+        flex-direction: row
+        font-style: normal
+        font-size: 14px
+        font-weight: 700
+        line-height: 21px
+        text-align: center
+        letter-spacing: 0.06em
+        text-transform: uppercase
+        color: #8A53FF
+      h3
+        font-style: normal
+        font-weight: 400
+        line-height: 40px
+        color: #434343
+    .pin_image
+      width: 50vh
+      height: 50vh
+      object-fit: cover
+    .info_wrapper
       display: flex
       flex-direction: row
       gap: 4px
       width: 100%
-      .pinImage
-        width: 50vh
-        height: 50vh
-        object-fit: cover
+      text-align: justify
+      p
+        font-style: normal
+        font-weight: 400
+        font-size: 18px
+        line-height: 26px
+        color: #576074

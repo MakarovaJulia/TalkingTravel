@@ -75,6 +75,7 @@ export const Form = () => {
                   comments: []
               }
               await setDoc(doc(database, 'posts', `${Date.now()}`), data)
+              setLoading(false)
           }
       } catch (error){
           console.log(error)
