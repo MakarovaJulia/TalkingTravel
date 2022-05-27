@@ -4,7 +4,7 @@ import styles from "./index.module.sass";
 import {Input} from "../ui/Input";
 import {database, storage, uploadUserPhoto, useAuth} from "../../firebase";
 import {getDownloadURL, ref, uploadBytes,  deleteObject, uploadBytesResumable} from 'firebase/storage'
-import {collection, onSnapshot, doc, setDoc, getDocs, query, where, orderBy} from "firebase/firestore";
+import {collection, onSnapshot, doc, setDoc, getDocs, query, where, orderBy, serverTimestamp} from "firebase/firestore";
 import {categories} from "../../categoriesData";
 import {RecommendedPins} from "../RecommendedPins";
 import {Spinner} from "../Spinner";
@@ -71,8 +71,8 @@ export const Form = () => {
                   imageURL: imageAsset,
                   description: description,
                   category: category,
-                  likes: [],
-                  comments: []
+                  timestamp: serverTimestamp(),
+                  likes: []
               }
               await setDoc(doc(database, 'posts', `${Date.now()}`), data)
               setLoading(false)

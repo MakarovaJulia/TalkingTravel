@@ -20,6 +20,16 @@ export const categoryFeeds = async (database:any, categoryId:any) =>{
     return feeds.docs.map(doc => doc.data())
 }
 
+export const getPinComments = async (database:any, pinId:any) => {
+    const comments = await getDocs(
+        query(
+            collection(database, "posts", pinId, "comments"),
+            orderBy("timestamp", "desc")
+        )
+    )
+    return comments.docs.map(doc => doc.data())
+}
+
 export const getUserInfo = async(database:any, userId:any) => {
     const userRef = doc(database, 'profile', userId)
     const userSnap = await getDoc(userRef)
