@@ -10,7 +10,6 @@ import {collection, getDocs, orderBy, query, where} from "firebase/firestore";
 import {RecommendedPins} from "../../components/RecommendedPins";
 import {Header} from "../../components/Header";
 import {LikesPage} from "../LikesPage";
-import {ListsPage} from "../ListsPage";
 import {Spinner} from "../../components/Spinner";
 import {GalleryPin} from "../../components/GalleryPin";
 import {deletePinById} from "../../utils/fetchData";

@@ -1,6 +1,7 @@
 import {observer} from "mobx-react";
 import {useNavigate} from "react-router";
 import {BaseLayout} from "../../components/BaseLayout";
+//import Comments from "../../components/Comments"
 import React, {useEffect, useRef, useState} from "react"
 import {useParams} from "react-router-dom"
 import {database, useAuth} from "../../firebase";

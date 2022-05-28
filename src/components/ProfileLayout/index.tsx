@@ -4,7 +4,7 @@ import styles from "./index.module.sass";
 import {Header} from "../Header";
 import {Outlet} from "react-router";
 import {Link, NavLink} from "react-router-dom";
-import React, {useEffect, useRef, useState} from "react"
+import React, {useEffect, useState} from "react"
 import {observer} from "mobx-react";
 import {useNavigate} from "react-router";
 import {database, logout, useAuth} from "../../firebase";
@@ -123,7 +123,6 @@ export const ProfileLayout: FC<IProfileLayout> = ({children}) => {
                         </div>
                         <div className={styles.menu}>
                             <NavLink to="/profile" className={(navData) => navData.isActive ? styles.menu_link_active : styles.menu_link} >Мои места</NavLink>
-                            <NavLink to="/lists" className={(navData) => navData.isActive ? styles.menu_link_active : styles.menu_link}>Подборки</NavLink>
                             <NavLink to="/likes" className={(navData) => navData.isActive ? styles.menu_link_active : styles.menu_link}>Лайки</NavLink>
                         </div>
                     </div>
