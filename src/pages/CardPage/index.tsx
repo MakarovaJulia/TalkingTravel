@@ -8,7 +8,19 @@ import styles from "./index.module.sass";
 import {getPinComments, getSpecificPin, getUserInfo} from "../../utils/fetchData";
 import {LikeArticle} from "../../components/LikeArticle";
 import {Spinner} from "../../components/Spinner";
-import {addDoc, collection, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp} from "firebase/firestore";
+import heartPurple from "../../assets/heart_purple.svg"
+import heartBlack from "../../assets/heart_black.svg"
+import {
+    addDoc,
+    collection,
+    deleteDoc,
+    doc,
+    getDocs,
+    onSnapshot,
+    orderBy,
+    query,
+    serverTimestamp, setDoc
+} from "firebase/firestore";
 import {PinComment} from "../../components/Comment";
 import Moment from "react-moment";
 import 'moment/locale/ru'
@@ -29,6 +41,8 @@ export const CardPage = observer(() => {
     const [currentUserInfo, setCurrentUserInfo] = useState<any>(null);
     const [comment, setComment] = useState<any>(null)
     const [comments, setComments] = useState<any>([])
+    const [liked, setLiked] = useState<any>(false)
+    const [likes, setLikes] = useState<any>([])
 
 
     useEffect(()=>{
@@ -48,8 +62,7 @@ export const CardPage = observer(() => {
         if(currentUser){
         getUserInfo(database,currentUser.uid).then((data)=>{
             setCurrentUserInfo(data)
-            }
-        )
+            })
         }
         console.log(currentUserInfo)
     }, [currentUser])
@@ -71,14 +84,36 @@ export const CardPage = observer(() => {
         getPinComments(database, pinId).then((data)=>{
                 setComments(data)
         })
-        console.log(comments)
-    }, [pinId, comments])
+    }, [pinId, comment])
+
+
+
+    useEffect(()=> onSnapshot(collection(doc(collection(database, "posts"), pinId), "likes"),
+        (snapshot)=> setLikes(snapshot.docs)
+        ),
+        [database, pinId]
+    )
+
+    useEffect(
+        ()=> {
+            setLiked(likes.findIndex((like:any)=> like.id === currentUser?.uid) !== -1
+            )
+            console.log(liked)
+        },
+        [likes]
+    )
+
+    const likePost = async () =>{
+        if (liked) {
+            await deleteDoc(doc(collection(doc(collection(database, "posts"), pinId), "likes"), currentUser.uid))
+        } else {
+            await setDoc(doc(collection(doc(collection(database, "posts"), pinId), "likes"), currentUser.uid), {
+                username: currentUserInfo.name
+            })
+        }
+    }
 
     if(loading) return <Spinner/>
-
-    const goTo = (path: string): void => {
-        navigate(path)
-    }
 
     return (
         <BaseLayout>
@@ -101,8 +136,15 @@ export const CardPage = observer(() => {
                             <p className={styles.info}>
                                 {imageInfo?.description}
                             </p>
-                            <div className={styles.like_btn}>
-                                {currentUser && <LikeArticle id={pinId} likes={imageInfo.likes} currentUser={currentUser}/>}
+                            <div className={styles.like_btn}
+                                 onClick={()=>{
+                                     likePost()
+                                   }}>
+                                {/*{currentUser && <LikeArticle id={pinId} likes={imageInfo.likes} currentUser={currentUser}/>}*/}
+                                {liked ?  <img className={styles.like_img} src={heartPurple}/> : <img className={styles.like_img} src={heartBlack}/>}
+                                {likes.length > 0 && (
+                                    <span>{likes.length}</span>
+                                )}
                             </div>
                         </div>
                     </div>

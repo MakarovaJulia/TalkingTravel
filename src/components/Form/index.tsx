@@ -71,8 +71,7 @@ export const Form = () => {
                   imageURL: imageAsset,
                   description: description,
                   category: category,
-                  timestamp: serverTimestamp(),
-                  likes: []
+                  timestamp: serverTimestamp()
               }
               await setDoc(doc(database, 'posts', `${Date.now()}`), data)
               setLoading(false)

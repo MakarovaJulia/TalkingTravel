@@ -5,6 +5,7 @@ import {getUserInfo} from "../../utils/fetchData";
 import {database, useAuth, storage} from "../../firebase";
 import avatar from '../../assets/header_profile_icon.svg'
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import Moment from "react-moment";
 
 
 export const GalleryPin = ({data}:any) => {
@@ -44,6 +45,7 @@ export const GalleryPin = ({data}:any) => {
                     </div>
                 </div>
                 <div className={styles.userInfo}>
+                    <Moment fromNow className={styles.title}>{data?.timestamp?.toDate().locale('ru')}</Moment>
                     <Link to={`/userDetail/${userId}`}>
                         <img className={styles.userImage} src={userInfo?.uid ?  userImg : avatar}/>
                     </Link>
