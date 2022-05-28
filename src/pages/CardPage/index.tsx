@@ -122,6 +122,16 @@ export const CardPage = observer(() => {
                 <div className={styles.content_container}>
                     <div className={styles.img_wrapper}>
                         <img className={styles.pin_image} src={imageInfo?.imageURL}/>
+                        <div className={styles.like_btn}
+                             onClick={()=>{
+                                 likePost()
+                             }}>
+                            {/*{currentUser && <LikeArticle id={pinId} likes={imageInfo.likes} currentUser={currentUser}/>}*/}
+                            {liked ?  <img className={styles.like_img} src={heartPurple}/> : <img className={styles.like_img} src={heartBlack}/>}
+                            {likes.length > 0 && (
+                                <span>{likes.length}</span>
+                            )}
+                        </div>
                     </div>
                     <div className={styles.title_wrapper}>
                         {userInfo && <div className={styles.username}>
@@ -137,16 +147,6 @@ export const CardPage = observer(() => {
                             <p className={styles.info}>
                                 {imageInfo?.description}
                             </p>
-                            <div className={styles.like_btn}
-                                 onClick={()=>{
-                                     likePost()
-                                   }}>
-                                {/*{currentUser && <LikeArticle id={pinId} likes={imageInfo.likes} currentUser={currentUser}/>}*/}
-                                {liked ?  <img className={styles.like_img} src={heartPurple}/> : <img className={styles.like_img} src={heartBlack}/>}
-                                {likes.length > 0 && (
-                                    <span>{likes.length}</span>
-                                )}
-                            </div>
                         </div>
                     </div>
                 </div>
