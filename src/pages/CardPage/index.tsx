@@ -107,10 +107,17 @@ export const CardPage = observer(() => {
     const likePost = async () =>{
         if (liked) {
             await deleteDoc(doc(collection(doc(collection(database, "posts"), pinId), "likes"), currentUser.uid))
+                .then(()=>
+                    deleteDoc(doc(collection(doc(collection(database, "profile"), currentUser.uid), "likedPosts"), pinId))
+                )
         } else {
             await setDoc(doc(collection(doc(collection(database, "posts"), pinId), "likes"), currentUser.uid), {
                 username: currentUserInfo.name
-            })
+            }).then(
+                ()=> setDoc(doc(collection(doc(collection(database, "profile"), currentUser.uid), "likedPosts"), pinId), {
+                    pinId: pinId
+                })
+            )
         }
     }
 
