@@ -38,13 +38,13 @@ export const signInWithGoogle = () =>{
 export function signup(email:any,  password:any, userData?:any){
     return createUserWithEmailAndPassword(auth, email, password)
         .then((registeredUser) => {
-        setDoc(doc(database, 'profile', registeredUser.user.uid), {
-            uid: registeredUser.user.uid,
-            name: userData.name,
-            email: userData.email
+            setDoc(doc(database, 'profile', registeredUser.user.uid), {
+                uid: registeredUser.user.uid,
+                name: userData.name,
+                email: userData.email
+            })
+                .then(res => console.log(res));
         })
-            .then(res => console.log(res));
-    })
 }
 
 export function login(email:any, password:any){
@@ -59,7 +59,7 @@ export function useAuth(){
     const [currentUser, setCurrentUser] = useState<any>(null);
 
     useEffect(()=>{
-       const unsub = onAuthStateChanged(auth, user => setCurrentUser(user))
+        const unsub = onAuthStateChanged(auth, user => setCurrentUser(user))
         return unsub
     },[])
 

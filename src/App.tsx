@@ -10,7 +10,6 @@ import {ProfilePage} from "./pages/ProfilePage";
 import {GalleryPin} from "./components/GalleryPin";
 import {CardPage} from "./pages/CardPage";
 import {LikesPage} from "./pages/LikesPage";
-import {ListsPage} from "./pages/ListsPage";
 import {OtherUserProfilePage} from "./pages/OtherUserProfilePage";
 import {Feed} from "./components/Feed";
 import {ProtectedRoute} from "./utils/protectedRoute";
@@ -40,9 +39,6 @@ const App = hot(module)(() => {
                 </Route>
                 <Route path="/likes" element={<ProfileLayout/>}>
                     <Route index element={<LikesPage/>}/>
-                </Route>
-                <Route path="/lists" element={<ProfileLayout/>}>
-                    <Route index element={<ListsPage/>}/>
                 </Route>
             </Route>
             <Route path="/login" element={<LoginPage />}/>
