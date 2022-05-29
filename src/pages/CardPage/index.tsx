@@ -6,7 +6,7 @@ import React, {useEffect, useRef, useState} from "react"
 import {useParams} from "react-router-dom"
 import {database, useAuth} from "../../firebase";
 import styles from "./index.module.sass";
-import {getPinComments, getSpecificPin, getUserInfo} from "../../utils/fetchData";
+import {getPinComments, getPinLikes, getSpecificPin, getUserInfo} from "../../utils/fetchData";
 import {LikeArticle} from "../../components/LikeArticle";
 import {Spinner} from "../../components/Spinner";
 import heartPurple from "../../assets/heart_purple.svg"
@@ -87,13 +87,17 @@ export const CardPage = observer(() => {
         })
     }, [pinId, comment])
 
+    useEffect(()=>{
+        getPinLikes(database, pinId).then((data)=>{
+            setLikes(data)
+        })
+    }, [pinId, likes])
 
-
-    useEffect(()=> onSnapshot(collection(doc(collection(database, "posts"), pinId), "likes"),
-        (snapshot)=> setLikes(snapshot.docs)
-        ),
-        [database, pinId]
-    )
+    // useEffect(()=> onSnapshot(collection(doc(collection(database, "posts"), pinId), "likes"),
+    //     (snapshot)=> setLikes(snapshot.docs)
+    //     ),
+    //     [database, pinId]
+    // )
 
     useEffect(
         ()=> {

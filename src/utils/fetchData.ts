@@ -30,6 +30,16 @@ export const getPinComments = async (database:any, pinId:any) => {
     return comments.docs.map(doc => doc.data())
 }
 
+export const getPinLikes = async (database:any, pinId:any) => {
+    const comments = await getDocs(
+        query(
+            collection(doc(collection(database, "posts"), pinId), "likes"),
+            orderBy("desc")
+        )
+    )
+    return comments.docs.map(doc => doc.data())
+}
+
 export const getUserInfo = async(database:any, userId:any) => {
     const userRef = doc(database, 'profile', userId)
     const userSnap = await getDoc(userRef)
