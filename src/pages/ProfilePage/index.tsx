@@ -1,15 +1,10 @@
 import React, {useEffect, useRef, useState} from "react"
 import {observer} from "mobx-react";
 import {Route, Routes, useNavigate} from "react-router";
-import {ProfileLayout} from "../../components/ProfileLayout";
 import {database, logout, useAuth} from "../../firebase";
-import {Button} from "../../components/ui/Button";
 import styles from "./index.module.sass";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import {collection, getDocs, orderBy, query, where} from "firebase/firestore";
-import {RecommendedPins} from "../../components/RecommendedPins";
-import {Header} from "../../components/Header";
-import {LikesPage} from "../LikesPage";
 import {Spinner} from "../../components/Spinner";
 import {GalleryPin} from "../../components/GalleryPin";
 import {deletePinById} from "../../utils/fetchData";

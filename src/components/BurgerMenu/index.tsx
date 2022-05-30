@@ -17,7 +17,7 @@ export const BurgerMenu = (props: any) =>{
         navigate(path)
     }
 
-    console.log(currentUser?.photoURL)
+    // console.log(currentUser?.photoURL)
 
     return (
         <div className={styles.container}>

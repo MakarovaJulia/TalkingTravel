@@ -7,17 +7,12 @@ import {GalleryPage} from "./pages/GalleryPage";
 import {LoginPage} from "./pages/LogInPage";
 import {SignUpPage} from "./pages/SignUpPage";
 import {ProfilePage} from "./pages/ProfilePage";
-import {GalleryPin} from "./components/GalleryPin";
 import {CardPage} from "./pages/CardPage";
 import {LikesPage} from "./pages/LikesPage";
 import {OtherUserProfilePage} from "./pages/OtherUserProfilePage";
-import {Feed} from "./components/Feed";
 import {ProtectedRoute} from "./utils/protectedRoute";
 import {useAuth} from "./firebase";
 import {ProfileLayout} from "./components/ProfileLayout";
-
-
-
 
 
 const App = hot(module)(() => {

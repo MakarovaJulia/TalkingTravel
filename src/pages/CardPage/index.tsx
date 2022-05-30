@@ -1,13 +1,11 @@
 import {observer} from "mobx-react";
 import {useNavigate} from "react-router";
 import {BaseLayout} from "../../components/BaseLayout";
-//import Comments from "../../components/Comments"
 import React, {useEffect, useRef, useState} from "react"
 import {useParams} from "react-router-dom"
 import {database, useAuth} from "../../firebase";
 import styles from "./index.module.sass";
 import {getPinComments, getPinLikes, getSpecificPin, getUserInfo} from "../../utils/fetchData";
-import {LikeArticle} from "../../components/LikeArticle";
 import {Spinner} from "../../components/Spinner";
 import heartPurple from "../../assets/heart_purple.svg"
 import heartBlack from "../../assets/heart_black.svg"
@@ -93,34 +91,23 @@ export const CardPage = observer(() => {
         })
     }, [pinId, likes])
 
-    // useEffect(()=> onSnapshot(collection(doc(collection(database, "posts"), pinId), "likes"),
-    //     (snapshot)=> setLikes(snapshot.docs)
-    //     ),
-    //     [database, pinId]
-    // )
-
-    useEffect(
-        ()=> {
-            setLiked(likes.findIndex((like:any)=> like.id === currentUser?.uid) !== -1
-            )
-            console.log(liked)
-        },
-        [likes]
-    )
-
     const likePost = async () =>{
         if (liked) {
             await deleteDoc(doc(collection(doc(collection(database, "posts"), pinId), "likes"), currentUser.uid))
-                .then(()=>
-                    deleteDoc(doc(collection(doc(collection(database, "profile"), currentUser.uid), "likedPosts"), pinId))
+                .then(()=> {
+                        deleteDoc(doc(collection(doc(collection(database, "profile"), currentUser.uid), "likedPosts"), pinId))
+                    setLiked(false)
+                    }
                 )
         } else {
             await setDoc(doc(collection(doc(collection(database, "posts"), pinId), "likes"), currentUser.uid), {
                 username: currentUserInfo.name
             }).then(
-                ()=> setDoc(doc(collection(doc(collection(database, "profile"), currentUser.uid), "likedPosts"), pinId), {
+                ()=> {setDoc(doc(collection(doc(collection(database, "profile"), currentUser.uid), "likedPosts"), pinId), {
                     pinId: pinId
                 })
+                setLiked(true)
+                }
             )
         }
     }
@@ -137,7 +124,6 @@ export const CardPage = observer(() => {
                              onClick={()=>{
                                  likePost()
                              }}>
-                            {/*{currentUser && <LikeArticle id={pinId} likes={imageInfo.likes} currentUser={currentUser}/>}*/}
                             {liked ?  <img className={styles.like_img} src={heartPurple}/> : <img className={styles.like_img} src={heartBlack}/>}
                             {likes.length > 0 && (
                                 <span>{likes.length}</span>
@@ -152,7 +138,7 @@ export const CardPage = observer(() => {
                         <h3>{imageInfo?.title}</h3>
                         <div className={styles.additional_info}>
                             <div>{imageInfo?.address}</div>
-                            <Moment fromNow>{imageInfo?.timestamp?.toDate().locale('ru')}</Moment>
+                            <Moment fromNow>{imageInfo?.timestamp?.toDate()}</Moment>
                         </div>
                         <div className={styles.info_wrapper}>
                             <p className={styles.info}>

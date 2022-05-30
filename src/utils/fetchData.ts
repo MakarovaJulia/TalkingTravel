@@ -74,6 +74,13 @@ export const getTopFourPins = async (database:any) => {
     return feeds.docs.map(doc => doc.data())
 }
 
+export const getUserLikedPosts = async (database:any, currentUser:any) => {
+    const liked = await getDocs(
+        query(collection(doc(collection(database, "profile"), currentUser.uid), "likedPosts"))
+    )
+    return liked.docs.map(doc => doc.data())
+}
+
 export const deletePinById = async (database:any, pinId:any) =>{
     await deleteDoc(doc(database, "posts", pinId))
 }
