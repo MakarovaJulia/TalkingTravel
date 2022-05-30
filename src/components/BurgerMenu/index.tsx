@@ -5,6 +5,8 @@ import burger_menu from '../../assets/burger_menu.svg'
 import {NavLink} from "react-router-dom";
 import {useNavigate} from "react-router";
 import {useAuth} from "../../firebase";
+import {Button} from "../ui/Button";
+import header_profile_icon from "../../assets/header_profile_icon.svg";
 
 export const BurgerMenu = (props: any) => {
     const {children} = props;
@@ -35,10 +37,16 @@ export const BurgerMenu = (props: any) => {
                                      className={(navData) => navData.isActive ? styles.menu_link_active : styles.menu_link}>
                                 Галерея
                             </NavLink>
-                            <NavLink to='/profile'
-                                     className={(navData) => navData.isActive ? styles.menu_link_active : styles.menu_link}>
-                                Профиль
-                            </NavLink>
+                            {!currentUser ?
+                                <Button id={styles.menu_login_btn} onClick={() => goTo('/login')} disabled={false}>
+                                    <img className={styles.menu_icon} src={header_profile_icon}/>
+                                </Button>
+                                :
+                                <Button id={styles.menu_login_btn} onClick={() => goTo('/profile')} disabled={false}>
+                                    <img className={styles.menu_icon}
+                                         src={currentUser?.photoURL ? currentUser?.photoURL : header_profile_icon}/>
+                                </Button>
+                            }
                         </div>
                     </div>}
                 </div>
