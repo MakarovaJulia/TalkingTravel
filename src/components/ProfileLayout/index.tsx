@@ -13,6 +13,7 @@ import {Button} from "../../components/ui/Button";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import {collection, getDocs, orderBy, query, where} from "firebase/firestore";
 import {Spinner} from "../Spinner";
+import {BurgerMenu} from "../BurgerMenu";
 
 
 export interface IProfileLayout {
@@ -100,6 +101,9 @@ export const ProfileLayout: FC<IProfileLayout> = ({children}) => {
                 <header className={styles.header}>
                     <Header/>
                 </header>
+                <div className={styles.burgerMenu}>
+                    <BurgerMenu />
+                </div>
                 <div className={styles.content_container}>
                     <div className={styles.content_wrapper}>
                         <div className={styles.user_info_wrapper}>
