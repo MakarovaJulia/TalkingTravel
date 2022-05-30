@@ -5,7 +5,6 @@ import styles from "./index.module.sass";
 import {Form} from "../../components/Form";
 
 
-
 export const AddCardPage = observer(() => {
     let navigate = useNavigate()
 
@@ -19,7 +18,8 @@ export const AddCardPage = observer(() => {
                 <div className={styles.content_container}>
                     <h4 className={styles.content_main_title}>Присоединяйся</h4>
                     <h2 className={styles.content_second_title}>Добавь новое место</h2>
-                    <h5 className={styles.content_third_title}>Карточка отобразиться на главной странице и в твоем блоге.</h5>
+                    <h5 className={styles.content_third_title}>Карточка отобразиться на главной странице и в твоем
+                        блоге.</h5>
                     <Form/>
                 </div>
             </div>

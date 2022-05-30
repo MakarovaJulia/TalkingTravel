@@ -1,7 +1,7 @@
 import {observer} from "mobx-react";
 import {useNavigate} from "react-router";
-import React, {useEffect, useRef, useState} from "react";
-import {signup, logout, login, useAuth, signInWithGoogle} from '../../firebase';
+import React, {useRef, useState} from "react";
+import {signInWithGoogle, signup, useAuth} from '../../firebase';
 import {NavLink} from "react-router-dom";
 import {Button} from "../../components/ui/Button";
 import {Input} from "../../components/ui/Input";
@@ -29,14 +29,13 @@ export const SignUpPage = observer(() => {
     })
 
 
-
-    async function handleSignUp(){
+    async function handleSignUp() {
         setLoading(true)
         try {
             await signup(emailRef.current.value, passwordRef.current.value, data)
             // navigate(`/userDetail/${currentUser.uid}`)
             navigate('/profile')
-        } catch(e) {
+        } catch (e) {
             console.log((e as Error).message)
         }
         setLoading(false)
@@ -65,8 +64,11 @@ export const SignUpPage = observer(() => {
                         <h6>-ИЛИ-</h6>
                     </div>
                     <div className={styles.signup_form}>
-                        <Input id={styles.name_input} ref={nameRef} onChange={(e: any) => setData({...data, name: e.target.value})} placeholder="Имя пользователя" />
-                        <Input id={styles.email_input} ref={emailRef} onChange={(e: any) => setData({...data, email: e.target.value})} placeholder="Email" />
+                        <Input id={styles.name_input} ref={nameRef}
+                               onChange={(e: any) => setData({...data, name: e.target.value})}
+                               placeholder="Имя пользователя"/>
+                        <Input id={styles.email_input} ref={emailRef}
+                               onChange={(e: any) => setData({...data, email: e.target.value})} placeholder="Email"/>
                         <div className={styles.password_wrapper}>
                             <div className={styles.password_input_wrapper}>
                                 <Input id={styles.password_input} ref={passwordRef}

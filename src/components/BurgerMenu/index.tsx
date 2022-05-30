@@ -6,14 +6,14 @@ import {NavLink} from "react-router-dom";
 import {useNavigate} from "react-router";
 import {useAuth} from "../../firebase";
 
-export const BurgerMenu = (props: any) =>{
-    const { children } = props;
+export const BurgerMenu = (props: any) => {
+    const {children} = props;
     let navigate = useNavigate()
     const [menuActive, setMenuActive] = useState(false)
 
     const currentUser = useAuth()
 
-    const goTo = (path:string): void => {
+    const goTo = (path: string): void => {
         navigate(path)
     }
 

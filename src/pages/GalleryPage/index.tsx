@@ -9,7 +9,6 @@ import styles from './index.module.sass';
 import {useAuth} from "../../firebase";
 
 
-
 export const GalleryPage = observer(() => {
     let navigate = useNavigate()
     const currentUser = useAuth()

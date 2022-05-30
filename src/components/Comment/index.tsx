@@ -2,7 +2,7 @@ import styles from "./index.module.sass";
 import Moment from "react-moment";
 
 
-export function PinComment ({id, comment}:any) {
+export function PinComment({id, comment}: any) {
     return (
         <div className={styles.comment_wrapper}>
             <img src={comment?.userImg} alt="" className={styles.user_image}/>

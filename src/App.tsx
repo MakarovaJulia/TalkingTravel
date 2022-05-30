@@ -1,6 +1,6 @@
 import React from 'react';
-import { hot } from "react-hot-loader";
-import { Routes, Route } from "react-router-dom";
+import {hot} from "react-hot-loader";
+import {Route, Routes} from "react-router-dom";
 import {MainPage} from "./pages/MainPage";
 import {AddCardPage} from "./pages/AddCardPage";
 import {GalleryPage} from "./pages/GalleryPage";
@@ -22,22 +22,22 @@ const App = hot(module)(() => {
 
     return (
         <Routes>
-            <Route path="/" element={<MainPage />}/>
-            <Route element={<ProtectedRoute isAllowed={!!currentUser} />}>
-                <Route path="/add_card_page" element={<AddCardPage />}/>
-                <Route path="/gallery" element={<GalleryPage />}/>
-                <Route path="/pinDetail/:pinId" element={<CardPage />}/>
-                <Route path="/userDetail/:userId" element={<OtherUserProfilePage />}/>
-                <Route path="/category/:categoryId" element={<GalleryPage />}/>
-                <Route path="/profile" element={<ProfileLayout />}>
+            <Route path="/" element={<MainPage/>}/>
+            <Route element={<ProtectedRoute isAllowed={!!currentUser}/>}>
+                <Route path="/add_card_page" element={<AddCardPage/>}/>
+                <Route path="/gallery" element={<GalleryPage/>}/>
+                <Route path="/pinDetail/:pinId" element={<CardPage/>}/>
+                <Route path="/userDetail/:userId" element={<OtherUserProfilePage/>}/>
+                <Route path="/category/:categoryId" element={<GalleryPage/>}/>
+                <Route path="/profile" element={<ProfileLayout/>}>
                     <Route index element={<ProfilePage/>}/>
                 </Route>
                 <Route path="/likes" element={<ProfileLayout/>}>
                     <Route index element={<LikesPage/>}/>
                 </Route>
             </Route>
-            <Route path="/login" element={<LoginPage />}/>
-            <Route path="/signup" element={<SignUpPage />}/>
+            <Route path="/login" element={<LoginPage/>}/>
+            <Route path="/signup" element={<SignUpPage/>}/>
         </Routes>
     );
 })

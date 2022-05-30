@@ -1,7 +1,6 @@
 import {observer} from "mobx-react";
-import {Navigate, useNavigate} from "react-router";
-import {BaseLayout} from "../../components/BaseLayout";
-import React, {useCallback, useContext, useRef, useState} from "react";
+import {useNavigate} from "react-router";
+import React, {useRef, useState} from "react";
 import {login, signInWithGoogle, useAuth} from "../../firebase";
 import {NavLink} from "react-router-dom";
 import {Button} from "../../components/ui/Button";
@@ -10,7 +9,6 @@ import styles from "./index.module.sass";
 import signup_img from "../../assets/signup_img.png";
 import sign_up_with_google_icon from "../../assets/sign_up_with_google_icon.svg";
 import {usePasswordToggle} from "../../utils/usePasswordToggle";
-
 
 
 export const LoginPage = observer(() => {
@@ -25,8 +23,7 @@ export const LoginPage = observer(() => {
     const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
 
-
-    async function handleLogin(){
+    async function handleLogin() {
         setLoading(true)
         try {
             await login(emailRef.current.value, passwordRef.current.value);
@@ -60,18 +57,18 @@ export const LoginPage = observer(() => {
                         <h6>-ИЛИ-</h6>
                     </div>
                     <div className={styles.login_form}>
-                        <Input id={styles.email_input} ref={emailRef} placeholder="Email" />
+                        <Input id={styles.email_input} ref={emailRef} placeholder="Email"/>
                         <div className={styles.password_wrapper}>
                             <div className={styles.password_input_wrapper}>
                                 <Input id={styles.password_input} ref={passwordRef}
-                                   type={passwordInputType} placeholder="Пароль"/>
+                                       type={passwordInputType} placeholder="Пароль"/>
                             </div>
                             <span className={styles.password_toggle_icon}>{toggleIcon}</span>
                         </div>
                         <Button disabled={false} onClick={handleLogin}>Войти</Button>
                     </div>
                     <div className={styles.login_footer}>
-                        Еще нет аккаунта? 
+                        Еще нет аккаунта?
                         <NavLink to='/signup'>
                             Зарегистрироваться
                         </NavLink>

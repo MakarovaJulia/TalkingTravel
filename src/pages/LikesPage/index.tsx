@@ -1,10 +1,10 @@
-import React, {useEffect, useRef, useState} from "react"
+import React, {useEffect, useState} from "react"
 import {observer} from "mobx-react";
-import {Route, Routes, useNavigate} from "react-router";
-import {database, logout, useAuth} from "../../firebase";
+import {useNavigate} from "react-router";
+import {database, useAuth} from "../../firebase";
 import styles from "./index.module.sass";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
-import {collection, deleteDoc, doc, getDocs, orderBy, query, where} from "firebase/firestore";
+import {collection, getDocs} from "firebase/firestore";
 import {GalleryPin} from "../../components/GalleryPin";
 import {getSpecificPin, getUserLikedPosts} from "../../utils/fetchData";
 
@@ -35,7 +35,7 @@ export const LikesPage = observer(() => {
         const getUserInfo = async () => {
             const data = await getDocs(usersDatabaseRef);
             let arr = data.docs.map((doc) => ({...doc.data()}))
-            let user = arr.findIndex(function (user,index){
+            let user = arr.findIndex(function (user, index) {
                 return user.uid === uid
             })
             let ans = arr[user]
@@ -46,18 +46,17 @@ export const LikesPage = observer(() => {
     }, [])
 
 
-    useEffect(()=>{
-        let arr:any
-        getUserLikedPosts(database, currentUser).then((data)=>{
-            data.map((pin)=>{
+    useEffect(() => {
+        let arr: any
+        getUserLikedPosts(database, currentUser).then((data) => {
+            data.map((pin) => {
                 console.log('PIN')
                 console.log(Object.values(pin).toString())
-                getSpecificPin(database, Object.values(pin).toString()).then((pin)=>
-                    {
-                        console.log('PIN')
-                        console.log(pin.data())
-                        arr.push()
-                    })
+                getSpecificPin(database, Object.values(pin).toString()).then((pin) => {
+                    console.log('PIN')
+                    console.log(pin.data())
+                    arr.push()
+                })
                 setLikes(data)
             })
         })

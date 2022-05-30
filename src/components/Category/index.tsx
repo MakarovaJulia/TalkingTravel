@@ -1,9 +1,8 @@
-import {observer} from "mobx-react";
 import styles from "./index.module.sass";
 import {NavLink} from "react-router-dom";
 import React from "react";
 
-export const Category = ({data}:any) => {
+export const Category = ({data}: any) => {
     return (
         <div className={styles.category_wrapper}>
             <NavLink to={`/category/${data.name}`}

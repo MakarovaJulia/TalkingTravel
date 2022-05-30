@@ -6,7 +6,7 @@ import styles from './index.module.sass';
 
 const cx = classNames.bind(styles);
 
-export const Button: FC<IButton> = ({id,onClick, disabled, type, mode='primary', children}) => {
+export const Button: FC<IButton> = ({id, onClick, disabled, type, mode = 'primary', children}) => {
     return (
         <button
             onClick={onClick}

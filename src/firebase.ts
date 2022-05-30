@@ -1,10 +1,17 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,
-    signOut, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import {getDownloadURL, getStorage, ref, uploadBytes, uploadBytesResumable} from "firebase/storage"
+import {initializeApp} from "firebase/app";
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut,
+    updateProfile
+} from "firebase/auth"
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage"
 import {useEffect, useState} from "react";
-import {addDoc, collection, doc, getFirestore, setDoc} from 'firebase/firestore';
-import firebase from "firebase/compat/app";
+import {collection, doc, getFirestore, setDoc} from 'firebase/firestore';
 import "firebase/firestore"
 import "firebase/storage"
 
@@ -26,16 +33,15 @@ export const database = getFirestore();
 const usersDatabaseRef = collection(database, 'profile');
 
 
-
-export const signInWithGoogle = () =>{
-    signInWithPopup(auth, provider).then((result)=>{
+export const signInWithGoogle = () => {
+    signInWithPopup(auth, provider).then((result) => {
         console.log(result)
-    }).catch((error)=>{
+    }).catch((error) => {
         console.log(error)
     })
 }
 
-export function signup(email:any,  password:any, userData?:any){
+export function signup(email: any, password: any, userData?: any) {
     return createUserWithEmailAndPassword(auth, email, password)
         .then((registeredUser) => {
             setDoc(doc(database, 'profile', registeredUser.user.uid), {
@@ -47,26 +53,26 @@ export function signup(email:any,  password:any, userData?:any){
         })
 }
 
-export function login(email:any, password:any){
+export function login(email: any, password: any) {
     return signInWithEmailAndPassword(auth, email, password);
 }
 
-export function logout(){
+export function logout() {
     return signOut(auth)
 }
 
-export function useAuth(){
+export function useAuth() {
     const [currentUser, setCurrentUser] = useState<any>(null);
 
-    useEffect(()=>{
+    useEffect(() => {
         const unsub = onAuthStateChanged(auth, user => setCurrentUser(user))
         return unsub
-    },[])
+    }, [])
 
     return currentUser;
 }
 
-export async function uploadUserPhoto(file:any, currentUser:any, setLoading:any){
+export async function uploadUserPhoto(file: any, currentUser: any, setLoading: any) {
     const fileRef = ref(storage, currentUser.uid + '.png')
     setLoading(true)
     const snapshot = await uploadBytes(fileRef, file)

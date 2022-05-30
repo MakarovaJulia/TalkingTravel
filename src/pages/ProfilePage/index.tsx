@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from "react"
+import React, {useEffect, useState} from "react"
 import {observer} from "mobx-react";
-import {Route, Routes, useNavigate} from "react-router";
+import {useNavigate} from "react-router";
 import {database, logout, useAuth} from "../../firebase";
 import styles from "./index.module.sass";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
@@ -36,7 +36,7 @@ export const ProfilePage = observer(() => {
         const getUserInfo = async () => {
             const data = await getDocs(usersDatabaseRef);
             let arr = data.docs.map((doc) => ({...doc.data()}))
-            let user = arr.findIndex(function (user,index){
+            let user = arr.findIndex(function (user, index) {
                 return user.uid === uid
             })
             let ans = arr[user]
@@ -46,7 +46,7 @@ export const ProfilePage = observer(() => {
         getUserInfo().then();
     }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         const userUploadedPins = async () => {
             const feeds = await getDocs(
                 query(postsDatabaseRef,
@@ -60,7 +60,7 @@ export const ProfilePage = observer(() => {
     }, [usersInfo, feeds])
 
 
-    async function handleLogout(){
+    async function handleLogout() {
         setLoading(true)
         try {
             await logout()
@@ -75,14 +75,14 @@ export const ProfilePage = observer(() => {
         console.log(currentUser)
     }
 
-    const deletePin = (id:any) => {
+    const deletePin = (id: any) => {
         setLoading(true)
         deletePinById(database, id)
         setLoading(false)
         navigate('/profile')
     }
 
-    if(loading) return <Spinner/>
+    if (loading) return <Spinner/>
 
     console.log(currentUser)
 
@@ -90,12 +90,13 @@ export const ProfilePage = observer(() => {
         <div className={styles.content_container}>
             <div className={styles.content_wrapper}>
                 <div className={styles.recommended_pins}>
-                {feeds && feeds.map((data: any) => (
-                    <div>
-                        <GalleryPin data={data}/>
-                        <button className={styles.delete_pin_btn} onClick={()=> deletePin(data.id)}>Удалить пост</button>
-                    </div>
-                ))}
+                    {feeds && feeds.map((data: any) => (
+                        <div>
+                            <GalleryPin data={data}/>
+                            <button className={styles.delete_pin_btn} onClick={() => deletePin(data.id)}>Удалить пост
+                            </button>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

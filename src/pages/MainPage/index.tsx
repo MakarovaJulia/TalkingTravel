@@ -5,13 +5,9 @@ import styles from "./index.module.sass";
 import {Button} from "../../components/ui/Button";
 import {database, useAuth} from "../../firebase";
 import preview_img from "../../assets/preview_img.png"
-import avatar from "../../assets/header_profile_icon.svg";
 import React, {useEffect, useState} from "react";
-import {collection, getDocs, limit, orderBy, query, where} from "firebase/firestore";
-import {categoryFeeds, getAllFeeds, getTopFourPins} from "../../utils/fetchData";
-import {RecommendedPins} from "../../components/RecommendedPins";
-
-
+import {collection} from "firebase/firestore";
+import {getTopFourPins} from "../../utils/fetchData";
 
 
 export const MainPage = observer(() => {
@@ -21,8 +17,8 @@ export const MainPage = observer(() => {
     const [feeds, setFeeds] = useState<any>(null)
     const postsDatabaseRef = collection(database, 'posts');
 
-    const handleShareStory = ()=> {
-        if (currentUser){
+    const handleShareStory = () => {
+        if (currentUser) {
             navigate('/add_card_page')
             console.log('Current user')
         } else {
@@ -30,7 +26,6 @@ export const MainPage = observer(() => {
             console.log('No current user')
         }
     }
-
 
 
     useEffect(() => {
@@ -48,7 +43,8 @@ export const MainPage = observer(() => {
                             <h1 className={styles.main_title}>
                                 <span>Расскажи</span> о своих путешествиях
                             </h1>
-                            <h5 className={styles.second_title}>Поделись своими любимыми местами. Размести их в своем блоге, чтобы все узнали о них!</h5>
+                            <h5 className={styles.second_title}>Поделись своими любимыми местами. Размести их в своем
+                                блоге, чтобы все узнали о них!</h5>
                             <Button disabled={false} onClick={handleShareStory}>Поделиться историей</Button>
                         </div>
                     </div>
@@ -70,7 +66,7 @@ export const MainPage = observer(() => {
             {/*        <RecommendedPins feeds={feeds}/>*/}
             {/*    )}*/}
             {/*</div>*/}
-            
+
         </BaseLayout>
     )
 });

@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './index.module.sass';
 import header_logo from '../../assets/header_logo.svg'
-import header_search_icon from '../../assets/header_search_icon.svg'
 import header_profile_icon from '../../assets/header_profile_icon.svg'
 import vertical_divider from '../../assets/vertical_divider.svg'
 import {NavLink} from "react-router-dom";
@@ -9,13 +8,13 @@ import {Button} from "../ui/Button";
 import {useNavigate} from "react-router";
 import {useAuth} from "../../firebase";
 
-export const Header = (props: any) =>{
-    const { children } = props;
+export const Header = (props: any) => {
+    const {children} = props;
     let navigate = useNavigate()
 
     const currentUser = useAuth()
 
-    const goTo = (path:string): void => {
+    const goTo = (path: string): void => {
         navigate(path)
     }
 
@@ -38,12 +37,13 @@ export const Header = (props: any) =>{
                     </div>
                     <img className={styles.vertical_divider} src={vertical_divider}/>
                     {!currentUser ?
-                        <Button id={styles.header_login_btn} onClick={()=> goTo('/login')} disabled={false}>
+                        <Button id={styles.header_login_btn} onClick={() => goTo('/login')} disabled={false}>
                             <img className={styles.header_icon} src={header_profile_icon}/>
                         </Button>
                         :
-                        <Button id={styles.header_login_btn} onClick={()=> goTo('/profile')} disabled={false}>
-                            <img className={styles.header_icon} src={currentUser?.photoURL ? currentUser?.photoURL : header_profile_icon}/>
+                        <Button id={styles.header_login_btn} onClick={() => goTo('/profile')} disabled={false}>
+                            <img className={styles.header_icon}
+                                 src={currentUser?.photoURL ? currentUser?.photoURL : header_profile_icon}/>
                         </Button>
                     }
                 </div>

@@ -1,17 +1,15 @@
 import {observer} from "mobx-react";
 import {useNavigate} from "react-router";
 import {BaseLayout} from "../../components/BaseLayout";
-import React, {useEffect, useRef, useState} from "react"
+import React, {useEffect, useState} from "react"
 import {useParams} from "react-router-dom"
-import {database, storage, useAuth} from "../../firebase";
+import {database, storage} from "../../firebase";
 import styles from "./index.module.sass";
 import {getUserInfo, userUploadedPins} from "../../utils/fetchData";
-import avatar from  "../../assets/header_profile_icon.svg"
-import {Button} from "../../components/ui/Button";
+import avatar from "../../assets/header_profile_icon.svg"
 import {RecommendedPins} from "../../components/RecommendedPins";
 import {getDownloadURL, ref} from "firebase/storage";
 import {Spinner} from "../../components/Spinner";
-
 
 
 export const OtherUserProfilePage = observer(() => {
@@ -32,8 +30,8 @@ export const OtherUserProfilePage = observer(() => {
         console.log(userInfo)
     }
 
-    useEffect(()=>{
-        if(userInfo){
+    useEffect(() => {
+        if (userInfo) {
             getDownloadURL(ref(storage, userInfo.uid + '.png'))
                 .then((url) => {
                     setUserImg(url)
@@ -41,9 +39,9 @@ export const OtherUserProfilePage = observer(() => {
         }
     }, [userInfo])
 
-    useEffect(()=>{
+    useEffect(() => {
         setLoading(true)
-        if(userId){
+        if (userId) {
             getUserInfo(database, userId).then(user => {
                 setUserInfo(user)
             })
@@ -53,18 +51,17 @@ export const OtherUserProfilePage = observer(() => {
             })
             setLoading(false)
         }
-    },[userId])
+    }, [userId])
 
 
-
-    if(loading) return <Spinner/>
+    if (loading) return <Spinner/>
 
     return (
         <BaseLayout>
             <div className={styles.content_container}>
                 <div className={styles.content_wrapper}>
                     <div className={styles.user_info_wrapper}>
-                        <img className={styles.userImage} src={userInfo?.uid ?  userImg : avatar}/>
+                        <img className={styles.userImage} src={userInfo?.uid ? userImg : avatar}/>
                         <div className={styles.user_info}>
                             <h5>{userInfo?.name}</h5>
                             <h5 className={styles.user_email}>{userInfo?.email}</h5>

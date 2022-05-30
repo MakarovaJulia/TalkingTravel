@@ -1,10 +1,7 @@
-import React, {useEffect, useRef, useState} from "react"
-import {collection} from "firebase/firestore";
-import {database, useAuth} from "../../firebase";
-import {useNavigate} from "react-router";
+import React, {useEffect, useState} from "react"
+import {database} from "../../firebase";
 import {categoryFeeds, getAllFeeds} from "../../utils/fetchData";
 import styles from "./index.module.sass";
-import {Button} from "../ui/Button";
 import {GalleryPin} from "../GalleryPin";
 import {useParams} from "react-router-dom";
 import {Spinner} from "../Spinner";
@@ -16,8 +13,8 @@ export const Feed = () => {
 
     useEffect(() => {
         setLoading(true)
-        if(categoryId){
-            categoryFeeds(database, categoryId).then((data) =>{
+        if (categoryId) {
+            categoryFeeds(database, categoryId).then((data) => {
                 setFeeds(data)
                 setLoading(false)
             })

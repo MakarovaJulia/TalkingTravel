@@ -1,4 +1,4 @@
-import React, {FC, useRef} from "react";
+import React from "react";
 import classNames from "classnames/bind";
 import {IInput} from "./index.interfaces";
 import styles from './index.module.sass';
@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 
 export const Input = React.forwardRef<HTMLInputElement, IInput>(
     (props, ref) => {
-        const { placeholder, type, title, id, value, onChange, required, children, ...inputProps} = props;
+        const {placeholder, type, title, id, value, onChange, required, children, ...inputProps} = props;
         return (
             <input
                 ref={ref}

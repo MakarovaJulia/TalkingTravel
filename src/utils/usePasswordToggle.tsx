@@ -13,5 +13,5 @@ export const usePasswordToggle = () => {
 
     const InputType = visible ? "text" : "password"
 
-    return[InputType, Icon]
+    return [InputType, Icon]
 }
