@@ -45,7 +45,7 @@ export const GalleryPin = ({data}:any) => {
                     </div>
                 </div>
                 <div className={styles.userInfo}>
-                    <Moment fromNow className={styles.title}>{data?.timestamp?.toDate().locale('ru')}</Moment>
+                    <Moment fromNow className={styles.title}>{data?.timestamp?.toDate()}</Moment>
                     <Link to={`/userDetail/${userId}`}>
                         <img className={styles.userImage} src={userInfo?.uid ?  userImg : avatar}/>
                     </Link>
