@@ -7,6 +7,7 @@ import {getAuth, onAuthStateChanged} from "firebase/auth";
 import {collection, getDocs} from "firebase/firestore";
 import {GalleryPin} from "../../components/GalleryPin";
 import {getSpecificPin, getUserLikedPosts} from "../../utils/fetchData";
+import {RecommendedPins} from "../../components/RecommendedPins";
 
 
 export const LikesPage = observer(() => {
@@ -55,7 +56,7 @@ export const LikesPage = observer(() => {
                 getSpecificPin(database, Object.values(pin).toString()).then((pin) => {
                     console.log('PIN')
                     console.log(pin.data())
-                    arr.push()
+                    // arr.push()
                 })
                 setLikes(data)
             })

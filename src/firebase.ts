@@ -17,13 +17,13 @@ import "firebase/storage"
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyA1DSJD4H2BDC0quOaoWlDnHYDtJ_5REks",
-    authDomain: "talking-travel-722ce.firebaseapp.com",
-    projectId: "talking-travel-722ce",
-    storageBucket: "talking-travel-722ce.appspot.com",
-    messagingSenderId: "270361645595",
-    appId: "1:270361645595:web:ad9d2e785f99f8a5449ebe"
-}
+    apiKey: "AIzaSyCCw26NpZGEh9Cw3y1RPz0KtDrzXExet5I",
+    authDomain: "travel-project-76111.firebaseapp.com",
+    projectId: "travel-project-76111",
+    storageBucket: "travel-project-76111.appspot.com",
+    messagingSenderId: "315051916002",
+    appId: "1:315051916002:web:d7902417e857e4bb527cbb"
+};
 
 export const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
