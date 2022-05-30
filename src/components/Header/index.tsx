@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './index.module.sass';
 import header_logo from '../../assets/header_logo.svg'
 import header_search_icon from '../../assets/header_search_icon.svg'
@@ -26,18 +26,17 @@ export const Header = (props: any) =>{
             <div className={styles.header_wrapper}>
                 <img className={styles.header_logo} src={header_logo}/>
                 <div className={styles.header_content_wrapper}>
-                <div className={styles.header_links_wrapper}>
-                    <NavLink to='/'
-                             className={(navData) => navData.isActive ? styles.header_link_active : styles.header_link}>
-                        Главная
-                    </NavLink>
-                    <NavLink to='/gallery'
-                             className={(navData) => navData.isActive ? styles.header_link_active : styles.header_link}>
-                        Галерея
-                    </NavLink>
-                </div>
+                    <div className={styles.header_links_wrapper}>
+                        <NavLink to='/'
+                                 className={(navData) => navData.isActive ? styles.header_link_active : styles.header_link}>
+                            Главная
+                        </NavLink>
+                        <NavLink to='/gallery'
+                                 className={(navData) => navData.isActive ? styles.header_link_active : styles.header_link}>
+                            Галерея
+                        </NavLink>
+                    </div>
                     <img className={styles.vertical_divider} src={vertical_divider}/>
-                    <img className={styles.header_icon} src={header_search_icon}/>
                     {!currentUser ?
                         <Button id={styles.header_login_btn} onClick={()=> goTo('/login')} disabled={false}>
                             <img className={styles.header_icon} src={header_profile_icon}/>

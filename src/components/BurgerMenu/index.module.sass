@@ -1,0 +1,57 @@
+.header_logo
+  z-index: 23
+  position: relative
+  margin-left: 15px
+
+.menu_icon
+  z-index: 21
+  display: block
+  position: relative
+  width: 40px
+  height: 40px
+  cursor: pointer
+  margin-left: 85%
+  margin-top: -45px
+
+
+.menu_body
+  position: fixed
+  top: 0
+  left: 0
+  width: 85%
+  height: 100%
+  padding: 100px 30px 30px 30px
+  transition: left 0.3s ease 0s
+  background-color: white
+  z-index: 20
+
+.menu_content_wrapper
+  flex-direction: column
+  justify-content: space-between
+  align-items: center
+  z-index: 22
+  height: 75px
+
+.menu_links_wrapper
+  flex-direction: column
+  height: 100px
+  margin-left: 20%
+
+.menu_link
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 100%
+  color: #000B26
+  opacity: 64%
+  text-decoration: none
+  margin-right: 24px
+  font-size: 20px
+
+.menu_link_active
+  @extend .menu_link
+  opacity: 100%
+  color: blueviolet
+
+
+
