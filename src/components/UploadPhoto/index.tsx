@@ -4,6 +4,7 @@ import {useAuth, uploadUserPhoto} from "../../firebase";
 import {set} from "mobx";
 import {inspect} from "util";
 import styles from "./index.module.sass";
+import {Spinner} from "../Spinner";
 
 export default function ProfilePage(){
     const currentUser = useAuth()
@@ -18,16 +19,12 @@ export default function ProfilePage(){
     }
 
     function handleClick(){
-        uploadUserPhoto(photo, currentUser, setLoading)
-    }
-
-    function refreshPage() {
-        window.location.reload();
-    }
-
-    function uploadPhoto() {
-        handleClick()
-        refreshPage()
+        setLoading(true)
+        uploadUserPhoto(photo, currentUser, setLoading).then(
+            ()=>{
+                setLoading(false)
+            }
+        )
     }
 
     useEffect(()=>{
@@ -42,8 +39,13 @@ export default function ProfilePage(){
             <div className={styles.input_photo_wrapper}>
                 <div className={styles.input_title}>Сменить аватар</div>
                 <input className={styles.input_photo} type="file" onChange={handleChange}/>
+                <div>
+                    {loading &&(
+                        <Spinner/>
+                    )}
+                </div>
             </div>
-            <button className={styles.input_photo_btn} disabled={loading || !photo} onClick={uploadPhoto}>Загрузить</button>
+            <button className={styles.input_photo_btn} disabled={loading || !photo} onClick={handleClick}>Загрузить</button>
         </div>
     )
 }
